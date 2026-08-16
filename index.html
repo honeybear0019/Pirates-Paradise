@@ -32,17 +32,29 @@
         }
 
 
-        /* MAIN CONTENT */
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
         .container {
-            width: 90%;
-            max-width: 1200px;
+            width: 95%;
+            max-width: 1500px;
+
             margin-top: 80px;
+            margin-bottom: 80px;
+
             text-align: center;
         }
 
 
-        /* PIRATE'S PARADISE BOX */
+        /* =========================
+           PIRATE'S PARADISE BOX
+        ========================= */
+
         .welcome-box {
+
+            width: 100%;
+            box-sizing: border-box;
 
             background:
                 linear-gradient(
@@ -63,12 +75,15 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
 
             position: relative;
+
             overflow: hidden;
         }
 
 
-        /* subtle shine inside box */
+        /* SUBTLE SHINE INSIDE BOX */
+
         .welcome-box::before {
+
             content: "";
 
             position: absolute;
@@ -76,7 +91,8 @@
             width: 400px;
             height: 400px;
 
-            background: rgba(255, 220, 150, 0.08);
+            background:
+                rgba(255, 220, 150, 0.08);
 
             transform: rotate(45deg);
 
@@ -85,8 +101,12 @@
         }
 
 
-        /* TITLE */
+        /* =========================
+           MAIN TITLE
+        ========================= */
+
         .welcome-box h1 {
+
             position: relative;
 
             font-size: 52px;
@@ -99,7 +119,9 @@
 
 
         /* WELCOME TEXT */
+
         .welcome-box p {
+
             position: relative;
 
             font-size: 22px;
@@ -112,60 +134,227 @@
         }
 
 
-        /* BUTTON AREA */
-        .button-area {
-            margin-top: 45px;
-        }
+        /* =========================
+           CHOOSE YOUR ADVENTURE
+        ========================= */
 
+        .section-title {
 
-        button {
-            background-color: #8b5a2b;
+            margin-top: 50px;
 
-            color: white;
+            font-size: 26px;
 
-            border: 2px solid #c9944c;
-
-            padding: 14px 32px;
-
-            border-radius: 10px;
-
-            font-size: 18px;
+            color: #f7ead4;
 
             font-weight: bold;
 
+            text-shadow:
+                0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* =========================
+           BLOX FRUITS GAME CARD
+        ========================= */
+
+        .game-card {
+
+            width: 75%;
+            max-width: 850px;
+
+            height: 260px;
+
+            margin: 25px auto 0;
+
+            position: relative;
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            border: 2px solid #d6ad60;
+
             cursor: pointer;
 
-            transition: 0.2s;
+            box-shadow:
+                0 14px 30px rgba(0, 0, 0, 0.4);
+
+            transition:
+                transform 0.25s,
+                box-shadow 0.25s;
         }
 
 
-        button:hover {
-            background-color: #a66b32;
+        /* GAME CARD HOVER */
 
-            transform: translateY(-3px);
+        .game-card:hover {
+
+            transform:
+                translateY(-5px)
+                scale(1.01);
 
             box-shadow:
-                0 8px 18px rgba(0, 0, 0, 0.3);
+                0 18px 40px rgba(0, 0, 0, 0.5);
         }
 
 
-        /* MOBILE */
+        /* =========================
+           VIDEO BACKGROUND
+        ========================= */
+
+        .game-card video {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* =========================
+           DARK VIDEO OVERLAY
+        ========================= */
+
+        .game-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, 0.85),
+                    rgba(0, 0, 0, 0.35),
+                    rgba(0, 0, 0, 0.05)
+                );
+
+            z-index: 1;
+        }
+
+
+        /* =========================
+           TEXT ON VIDEO
+        ========================= */
+
+        .game-card-content {
+
+            position: absolute;
+
+            z-index: 2;
+
+            bottom: 30px;
+            left: 35px;
+
+            text-align: left;
+        }
+
+
+        /* BLOX FRUITS TITLE */
+
+        .game-card-content h2 {
+
+            margin: 0;
+
+            font-size: 34px;
+
+            text-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.8);
+        }
+
+
+        /* BLOX FRUITS DESCRIPTION */
+
+        .game-card-content p {
+
+            margin: 8px 0 0;
+
+            color: #f7ead4;
+
+            font-size: 17px;
+
+            text-shadow:
+                0 3px 6px rgba(0, 0, 0, 0.8);
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media (max-width: 600px) {
 
             .container {
+
+                width: 92%;
+
                 margin-top: 40px;
             }
 
+
             .welcome-box {
+
                 padding: 40px 20px;
+
+                border-radius: 20px;
             }
 
+
             .welcome-box h1 {
+
                 font-size: 36px;
             }
 
+
             .welcome-box p {
+
                 font-size: 18px;
+            }
+
+
+            .section-title {
+
+                font-size: 22px;
+
+                margin-top: 40px;
+            }
+
+
+            .game-card {
+
+                width: 95%;
+
+                height: 210px;
+
+                border-radius: 18px;
+            }
+
+
+            .game-card-content {
+
+                left: 20px;
+                bottom: 20px;
+
+                right: 20px;
+            }
+
+
+            .game-card-content h2 {
+
+                font-size: 27px;
+            }
+
+
+            .game-card-content p {
+
+                font-size: 15px;
             }
 
         }
@@ -181,11 +370,15 @@
     <div class="container">
 
 
-        <!-- MAIN WELCOME BOX -->
+        <!-- =====================
+             MAIN WELCOME BOX
+        ====================== -->
 
         <div class="welcome-box">
 
-            <h1>Pirate's Paradise</h1>
+            <h1>
+                Pirate's Paradise
+            </h1>
 
             <p>
                 Welcome to Pirate's Paradise!
@@ -193,18 +386,62 @@
 
         </div>
 
-        <!-- Our Games -->
 
-        <p style="margin-top: 40px; font-size: 20px; color: #f7ead4;">
-            Our Games
 
-        <!-- BLOX FRUITS BUTTON -->
+        <!-- =====================
+             SECTION TITLE
+        ====================== -->
 
-        <div class="button-area">
+        <div class="section-title">
 
-            <button onclick="window.location.href='BloxFruits.html'">
-                Blox Fruits
-            </button>
+            Choose Your Adventure
+
+        </div>
+
+
+
+        <!-- =====================
+             BLOX FRUITS VIDEO CARD
+        ====================== -->
+
+        <div
+            class="game-card"
+            onclick="window.location.href='BloxFruits.html'"
+        >
+
+
+            <!-- VIDEO -->
+
+            <video
+                autoplay
+                muted
+                loop
+                playsinline
+            >
+
+                <source
+                    src="bloxfruits.mp4"
+                    type="video/mp4"
+                >
+
+            </video>
+
+
+
+            <!-- TEXT -->
+
+            <div class="game-card-content">
+
+                <h2>
+                    Blox Fruits
+                </h2>
+
+                <p>
+                    Check values, calculate trades and explore the market.
+                </p>
+
+            </div>
+
 
         </div>
 
