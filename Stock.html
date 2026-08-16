@@ -1,34 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+
+    <title>Paradise - Stock</title>
+
     <style>
-    body {
-        background:
-            linear-gradient(
-                to top,
-                #000000 0%,
-                rgba(0, 0, 0, 0.95) 25%,
-                transparent 100%
-            ),
-            #00101c;
 
-        color: white;
+        * {
+            box-sizing: border-box;
+        }
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
 
-        min-height: 100vh;
-        margin: 0;
-    }
-</style>
-    <h1>Go check it urself gng</h1>
-    <p>FLASHBANG!</p>
+        body {
+            background:
+                linear-gradient(
+                    to bottom,
+                    #d6b77c 0%,
+                    #b8925b 35%,
+                    #765333 70%,
+                    #24180f 100%
+                );
+
+            color: white;
+
+            min-height: 100vh;
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+
+        /* =========================
+           PAGE WRAPPER
+        ========================= */
+
+        .page {
+            width: 92%;
+
+            max-width: 1000px;
+
+            text-align: center;
+
+            padding:
+                50px 20px;
+        }
+
+
+        /* =========================
+           MAIN STOCK BOX
+        ========================= */
+
+        .stock-box {
+            position: relative;
+
+            overflow: hidden;
+
+            padding:
+                55px 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5f4025,
+                    #8b5a2b,
+                    #c3914c
+                );
+
+            border:
+                2px solid
+                #d6ad60;
+
+            border-radius:
+                28px;
+
+            box-shadow:
+                0 14px 35px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.38
+                ),
+                inset
+                0 1px 0
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+        }
+
+
+        /* decorative shine */
+
+        .stock-box::before {
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            top: -300px;
+            right: 60px;
+
+            background:
+                rgba(
+                    255,
+                    220,
+                    150,
+                    0.08
+                );
+
+            transform:
+                rotate(45deg);
+        }
+
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .stock-box h1 {
+            position: relative;
+
+            z-index: 2;
+
+            margin:
+                0 0 15px;
+
+            font-size:
+                46px;
+
+            text-shadow:
+                0 4px 8px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                );
+        }
+
+
+        /* =========================
+           SUBTITLE
+        ========================= */
+
+        .stock-box p {
+            position: relative;
+
+            z-index: 2;
+
+            margin:
+                0;
+
+            color:
+                #f7ead4;
+
+            font-size:
+                18px;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =========================
+           FLASHBANG CARD
+        ========================= */
+
+        .flash-card {
+            margin:
+                35px auto 0;
+
+            max-width:
+                540px;
+
+            padding:
+                28px;
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(
+                    40,
+                    24,
+                    14,
+                    0.45
+                );
+
+            border:
+                1px solid
+                #c9944c;
+
+            position:
+                relative;
+
+            z-index:
+                2;
+        }
+
+
+        .flash-card h2 {
+            margin:
+                0 0 10px;
+
+            font-size:
+                28px;
+
+            color:
+                #ffd36a;
+        }
+
+
+        .flash-card p {
+            font-size:
+                16px;
+
+            color:
+                #ead8bc;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .button-row {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+
+            margin-top:
+                30px;
+        }
+
+
+        button {
+            background:
+                #8b5a2b;
+
+            color:
+                white;
+
+            border:
+                2px solid
+                #c9944c;
+
+            padding:
+                13px 22px;
+
+            border-radius:
+                10px;
+
+            font-size:
+                16px;
+
+            font-weight:
+                bold;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+        }
+
+
+        button:hover {
+            background:
+                #a66b32;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.3
+                );
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .page {
+                width:
+                    94%;
+
+                padding:
+                    30px 10px;
+            }
+
+
+            .stock-box {
+                padding:
+                    40px 20px;
+
+                border-radius:
+                    20px;
+            }
+
+
+            .stock-box h1 {
+                font-size:
+                    34px;
+            }
+
+
+            .stock-box p {
+                font-size:
+                    16px;
+            }
+
+
+            .flash-card h2 {
+                font-size:
+                    24px;
+            }
+
+
+            .button-row {
+                flex-direction:
+                    column;
+            }
+
+
+            button {
+                width:
+                    100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="page">
+
+
+        <div class="stock-box">
+
+
+            <h1>
+                Fruit Stock
+            </h1>
+
+
+            <p>
+                Looking for the current Blox Fruits stock?
+            </p>
+
+
+            <div class="flash-card">
+
+                <h2>
+                    FLASHBANG! 💥
+                </h2>
+
+                <p>
+                    Yeah... the stock checker isn't ready yet.
+                    Go check it yourself for now 😭
+                </p>
+
+            </div>
+
+
+            <div class="button-row">
+
+                <button
+                    onclick="window.location.href='BloxFruits.html'"
+                >
+                    ← Back to Blox Fruits
+                </button>
+
+                <button
+                    onclick="window.location.href='calculator.html'"
+                >
+                    Check Values
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
 </body>
+
 </html>
