@@ -1,50 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Pirate's Paradise</title>
+
+    <style>
+
+        body {
+            background:
+                linear-gradient(
+                    to bottom,
+                    #d6b77c 0%,
+                    #b8925b 35%,
+                    #765333 70%,
+                    #24180f 100%
+                );
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            min-height: 100vh;
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* MAIN CONTENT */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+
+        /* PIRATE'S PARADISE BOX */
+        .welcome-box {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5f4025,
+                    #8b5a2b,
+                    #c3914c
+                );
+
+            border: 2px solid #d6ad60;
+
+            border-radius: 28px;
+
+            padding: 55px 30px;
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /* subtle shine inside box */
+        .welcome-box::before {
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            background: rgba(255, 220, 150, 0.08);
+
+            transform: rotate(45deg);
+
+            top: -250px;
+            right: 100px;
+        }
+
+
+        /* TITLE */
+        .welcome-box h1 {
+            position: relative;
+
+            font-size: 52px;
+
+            margin: 0 0 20px 0;
+
+            text-shadow:
+                0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+
+        /* WELCOME TEXT */
+        .welcome-box p {
+            position: relative;
+
+            font-size: 22px;
+
+            margin: 0;
+
+            color: #f7ead4;
+
+            font-weight: 600;
+        }
+
+
+        /* BUTTON AREA */
+        .button-area {
+            margin-top: 45px;
+        }
+
+
+        button {
+            background-color: #8b5a2b;
+
+            color: white;
+
+            border: 2px solid #c9944c;
+
+            padding: 14px 32px;
+
+            border-radius: 10px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        button:hover {
+            background-color: #a66b32;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+
+            .container {
+                margin-top: 40px;
+            }
+
+            .welcome-box {
+                padding: 40px 20px;
+            }
+
+            .welcome-box h1 {
+                font-size: 36px;
+            }
+
+            .welcome-box p {
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-   <style>
-body {
-    background:
-        linear-gradient(
-            to bottom,
-            #d6b77c 0%,
-            #b8925b 35%,
-            #765333 70%,
-            #24180f 100%
-        );
 
-    color: white;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    <div class="container">
 
-    min-height: 100vh;
-    margin: 0;
-}
-button {
-    background-color: #8b5a2b;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-}
 
-button:hover {
-    background-color: #a66b32;
-}
-</style>
+        <!-- MAIN WELCOME BOX -->
 
-    <h1>Pirate's Paradise</h1>
-    <p>Welcome to the Pirate's Paradise!</p>
-    <button onclick="window.location.href='BloxFruits.html'">Blox Fruits</button>
+        <div class="welcome-box">
+
+            <h1>🏴‍☠️ Pirate's Paradise</h1>
+
+            <p>
+                Welcome to Pirate's Paradise!
+            </p>
+
+        </div>
+
+
+        <!-- BLOX FRUITS BUTTON -->
+
+        <div class="button-area">
+
+            <button onclick="window.location.href='BloxFruits.html'">
+                Blox Fruits
+            </button>
+
+        </div>
+
+
+    </div>
+
 
 </body>
+
 </html>
