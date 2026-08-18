@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,8 +10,22 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Paradise - Values</title>
-    <link rel="icon" type="image/webp" href="PP.webp">
+    <title>
+        Pirate's Paradise - Blox Fruits Values
+    </title>
+
+    <meta
+        name="description"
+        content="Check Blox Fruits physical values, permanent values, demand, Beli prices, permanent Robux prices and fruit types."
+    >
+
+    <link
+        rel="icon"
+        type="image/webp"
+        href="PP.webp"
+    >
+
+
     <style>
 
         * {
@@ -36,7 +51,9 @@
 
             margin: 0;
 
-            font-family: Arial, sans-serif;
+            font-family:
+                Arial,
+                sans-serif;
         }
 
 
@@ -96,9 +113,20 @@
 
             box-shadow:
                 0 12px 30px
-                rgba(0, 0, 0, 0.35),
-                inset 0 1px 0
-                rgba(255, 255, 255, 0.15);
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                ),
+                inset
+                0 1px 0
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
         }
 
 
@@ -188,7 +216,7 @@
 
 
         /* =========================
-           SEARCH SECTION
+           SEARCH PANEL
         ========================= */
 
         .search-panel {
@@ -361,7 +389,7 @@
 
 
         /* =========================
-           SEARCH RESULT AREA
+           RESULT AREA
         ========================= */
 
         #result {
@@ -383,13 +411,13 @@
 
 
         /* =========================
-           ITEM RESULT CARD
+           RESULT CARD
         ========================= */
 
         .result-card {
             width: 100%;
 
-            max-width: 500px;
+            max-width: 540px;
 
             padding: 28px;
 
@@ -449,6 +477,10 @@
         }
 
 
+        /* =========================
+           ITEM IMAGE
+        ========================= */
+
         .item-image {
             width: 190px;
 
@@ -480,8 +512,7 @@
 
             z-index: 2;
 
-            font-size:
-                30px;
+            font-size: 30px;
 
             margin:
                 5px 0
@@ -490,7 +521,7 @@
 
 
         /* =========================
-           ITEM INFORMATION
+           ITEM INFO
         ========================= */
 
         .item-info {
@@ -540,8 +571,7 @@
                     0.09
                 );
 
-            font-size:
-                17px;
+            font-size: 17px;
         }
 
 
@@ -554,12 +584,27 @@
         .label {
             color:
                 #d7c5aa;
+
+            text-align:
+                left;
         }
 
 
-        .value {
+        .physical-value {
             color:
                 #ffd36a;
+        }
+
+
+        .permanent-value {
+            color:
+                #ffca76;
+        }
+
+
+        .demand {
+            color:
+                #78e0a6;
         }
 
 
@@ -569,9 +614,9 @@
         }
 
 
-        .demand {
+        .robux-price {
             color:
-                #78e0a6;
+                #8fd5ff;
         }
 
 
@@ -738,7 +783,9 @@
                 font-size:
                     15px;
             }
+
         }
+
 
     </style>
 
@@ -751,10 +798,6 @@
 <div class="page">
 
 
-    <!-- =========================
-         VALUES HEADER
-    ========================== -->
-
     <div class="values-header">
 
         <h1>
@@ -762,16 +805,12 @@
         </h1>
 
         <p>
-            Search Blox Fruits values, demand, prices and item information.
+            Search physical values, permanent values,
+            demand, prices and fruit information.
         </p>
 
     </div>
 
-
-
-    <!-- =========================
-         SEARCH PANEL
-    ========================== -->
 
     <div class="search-panel">
 
@@ -780,7 +819,7 @@
         </h2>
 
         <p class="search-description">
-            Enter a fruit, item or gamepass below.
+            Enter a fruit, limited item or gamepass below.
         </p>
 
 
@@ -790,6 +829,7 @@
                 type="text"
                 id="fruitInput"
                 placeholder="Enter fruit or item name"
+                autocomplete="off"
             >
 
 
@@ -807,11 +847,6 @@
     </div>
 
 
-
-    <!-- =========================
-         BACK BUTTON
-    ========================== -->
-
     <button
         class="back-button"
         onclick="window.location.href='BloxFruits.html'"
@@ -821,7 +856,6 @@
 
 
 </div>
-
 
 
 <script>
@@ -836,70 +870,91 @@ const items = {
 
 
 rocket: {
+    category: "fruit",
     value: 5000,
+    permanentValue: 10000000,
     demand: "1/10",
+    demandType: "Stable",
     price: 5000,
-    priceType: "Beli",
+    robuxPrice: 50,
     fruitType: "Natural",
     image: "Rocket_Fruit.webp"
 },
 
 
 spin: {
+    category: "fruit",
     value: 7500,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 7500,
-    priceType: "Beli",
+    robuxPrice: 75,
     fruitType: "Natural",
     image: "Spin_Fruit.webp"
 },
 
 
 blade: {
+    category: "fruit",
     value: 50000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 30000,
-    priceType: "Beli",
+    robuxPrice: 100,
     fruitType: "Natural",
     image: "Blade_Fruit.webp"
 },
 
 
 spring: {
+    category: "fruit",
     value: 60000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 60000,
-    priceType: "Beli",
+    robuxPrice: 180,
     fruitType: "Natural",
     image: "Spring_Fruit.webp"
 },
 
 
 bomb: {
+    category: "fruit",
     value: 80000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 80000,
-    priceType: "Beli",
+    robuxPrice: 220,
     fruitType: "Natural",
     image: "Bomb_Fruit.webp"
 },
 
 
 smoke: {
+    category: "fruit",
     value: 100000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 100000,
-    priceType: "Beli",
+    robuxPrice: 250,
     fruitType: "Logia",
     image: "Smoke_Fruit.webp"
 },
 
 
 spike: {
+    category: "fruit",
     value: 180000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 180000,
-    priceType: "Beli",
+    robuxPrice: 380,
     fruitType: "Natural",
     image: "Spike_Fruit.webp"
 },
@@ -912,60 +967,78 @@ spike: {
 
 
 flame: {
+    category: "fruit",
     value: 250000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 250000,
-    priceType: "Beli",
+    robuxPrice: 550,
     fruitType: "Logia",
     image: "Flame_Fruit.webp"
 },
 
 
 dark: {
+    category: "fruit",
     value: 400000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 500000,
-    priceType: "Beli",
+    robuxPrice: 950,
     fruitType: "Logia",
     image: "Dark_Fruit.webp"
 },
 
 
 sand: {
+    category: "fruit",
     value: 420000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 420000,
-    priceType: "Beli",
+    robuxPrice: 850,
     fruitType: "Logia",
     image: "Sand_Fruit.webp"
 },
 
 
 ice: {
+    category: "fruit",
     value: 550000,
+    permanentValue: "N/A",
     demand: "2/10",
+    demandType: "N/A",
     price: 350000,
-    priceType: "Beli",
+    robuxPrice: 750,
     fruitType: "Logia",
     image: "Ice_Fruit.webp"
 },
 
 
 rubber: {
+    category: "fruit",
     value: 700000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 750000,
-    priceType: "Beli",
+    robuxPrice: 1200,
     fruitType: "Natural",
     image: "Rubber_Fruit.webp"
 },
 
 
 eagle: {
+    category: "fruit",
     value: 800000,
+    permanentValue: "N/A",
     demand: "2/10",
+    demandType: "N/A",
     price: 550000,
-    priceType: "Beli",
+    robuxPrice: 975,
     fruitType: "Beast",
     image: "Eagle_Fruit.webp"
 },
@@ -978,50 +1051,65 @@ eagle: {
 
 
 ghost: {
+    category: "fruit",
     value: 800000,
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 940000,
-    priceType: "Beli",
+    robuxPrice: 1275,
     fruitType: "Natural",
     image: "Ghost_Fruit.webp"
 },
 
 
 light: {
+    category: "fruit",
     value: 800000,
+    permanentValue: "N/A",
     demand: "2/10",
+    demandType: "N/A",
     price: 650000,
-    priceType: "Beli",
+    robuxPrice: 1100,
     fruitType: "Logia",
     image: "Light_Fruit.webp"
 },
 
 
 diamond: {
+    category: "fruit",
     value: 1000000,
+    permanentValue: "N/A",
     demand: "2/10",
+    demandType: "N/A",
     price: 600000,
-    priceType: "Beli",
+    robuxPrice: 1000,
     fruitType: "Natural",
     image: "Diamond_Fruit.webp"
 },
 
 
 quake: {
+    category: "fruit",
     value: 1000000,
+    permanentValue: "N/A",
     demand: "2/10",
+    demandType: "N/A",
     price: 1000000,
-    priceType: "Beli",
+    robuxPrice: 1500,
     fruitType: "Natural",
     image: "Quake_Fruit.webp"
 },
 
 
 magma: {
+    category: "fruit",
     value: 1150000,
+    permanentValue: "N/A",
     demand: "5/10",
+    demandType: "N/A",
     price: 960000,
-    priceType: "Beli",
+    robuxPrice: 1300,
     fruitType: "Logia",
     image: "Magma_Fruit.webp"
 },
@@ -1034,259 +1122,334 @@ magma: {
 
 
 love: {
+    category: "fruit",
     value: 1500000,
+    permanentValue: "N/A",
     demand: "3/10",
+    demandType: "N/A",
     price: 1300000,
-    priceType: "Beli",
+    robuxPrice: 1700,
     fruitType: "Natural",
     image: "Love_Fruit.webp"
 },
 
 
 spider: {
+    category: "fruit",
     value: 1500000,
+    permanentValue: "N/A",
     demand: "2/10",
+    demandType: "N/A",
     price: 1500000,
-    priceType: "Beli",
+    robuxPrice: 1800,
     fruitType: "Natural",
     image: "Spider_Fruit.webp"
 },
 
 
 sound: {
+    category: "fruit",
     value: 2500000,
+    permanentValue: "N/A",
     demand: "4/10",
+    demandType: "N/A",
     price: 1700000,
-    priceType: "Beli",
+    robuxPrice: 1900,
     fruitType: "Natural",
     image: "Sound_Fruit.webp"
 },
 
 
 phoenix: {
+    category: "fruit",
     value: 2750000,
+    permanentValue: "N/A",
     demand: "3/10",
+    demandType: "N/A",
     price: 1800000,
-    priceType: "Beli",
+    robuxPrice: 2000,
     fruitType: "Beast",
     image: "Phoenix_Fruit.webp"
 },
 
 
 creation: {
+    category: "fruit",
     value: 2500000,
+    permanentValue: "N/A",
     demand: "2/10",
+    demandType: "N/A",
     price: 1400000,
-    priceType: "Beli",
+    robuxPrice: 1750,
     fruitType: "Natural",
     image: "Creation_Fruit.webp"
 },
 
 
 blizzard: {
+    category: "fruit",
     value: 5000000,
+    permanentValue: "N/A",
     demand: "5/10",
+    demandType: "N/A",
     price: 2400000,
-    priceType: "Beli",
+    robuxPrice: 2250,
     fruitType: "Logia",
     image: "Blizzard_Fruit.webp"
 },
 
 
 portal: {
+    category: "fruit",
     value: 10000000,
-    demand: "10/10",
+    permanentValue: 4900000000,
+    demand: "9/10",
+    demandType: "Overpaid",
     price: 1900000,
-    priceType: "Beli",
+    robuxPrice: 2000,
     fruitType: "Natural",
     image: "Portal_Fruit.webp"
 },
 
 
 buddha: {
+    category: "fruit",
     value: 10000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: 1200000,
-    priceType: "Beli",
+    robuxPrice: 1650,
     fruitType: "Beast",
     image: "Buddha_Fruit.webp"
 },
 
 
 lightning: {
+    category: "fruit",
     value: 50000000,
+    permanentValue: 3300000000,
     demand: "5/10",
+    demandType: "Underpaid",
     price: 2100000,
-    priceType: "Beli",
+    robuxPrice: 2100,
     fruitType: "Logia",
     image: "Lightning_Fruit.webp"
 },
 
 
+pain: {
+    category: "fruit",
+    value: 10000000,
+    permanentValue: 3500000000,
+    demand: "5/10",
+    demandType: "Stable",
+    price: 2300000,
+    robuxPrice: 2200,
+    fruitType: "Natural",
+    image: "Pain_Fruit.webp"
+},
 
 /* ================================
    MYTHICAL FRUITS
 ================================ */
 
 
-shadow: {
-    value: 6500000,
-    demand: "5/10",
-    price: 2900000,
-    priceType: "Beli",
-    fruitType: "Natural",
-    image: "Shadow_Fruit.webp"
-},
-
-
-pain: {
-    value: 10000000,
-    demand: "5/10",
-    price: 2300000,
-    priceType: "Beli",
-    fruitType: "Natural",
-    image: "Pain_Fruit.webp"
-},
-
-
 gravity: {
+    category: "fruit",
     value: 10000000,
+    permanentValue: "N/A",
     demand: "5/10",
+    demandType: "N/A",
     price: 2500000,
-    priceType: "Beli",
+    robuxPrice: 2300,
     fruitType: "Natural",
     image: "Gravity_Fruit.webp"
 },
 
 
 mammoth: {
+    category: "fruit",
     value: 10000000,
+    permanentValue: 4000000000,
     demand: "5/10",
+    demandType: "Stable",
     price: 2700000,
-    priceType: "Beli",
+    robuxPrice: 2350,
     fruitType: "Beast",
     image: "Mammoth_Fruit.webp"
 },
 
 
-spirit: {
-    value: 10000000,
-    demand: "7/10",
-    price: 3400000,
-    priceType: "Beli",
-    fruitType: "Natural",
-    image: "Spirit_Fruit.webp"
-},
-
-
 "t-rex": {
+    category: "fruit",
     value: 20000000,
+    permanentValue: "N/A",
     demand: "8/10",
+    demandType: "N/A",
     price: 2700000,
-    priceType: "Beli",
+    robuxPrice: 2350,
     fruitType: "Beast",
     image: "T-Rex_Fruit.webp"
 },
 
 
-venom: {
-    value: 20000000,
-    demand: "8/10",
-    price: 3000000,
-    priceType: "Beli",
-    fruitType: "Natural",
-    image: "Venom_Fruit.webp"
-},
-
-
 dough: {
+    category: "fruit",
     value: 30000000,
+    permanentValue: "N/A",
     demand: "9/10",
+    demandType: "N/A",
     price: 2800000,
-    priceType: "Beli",
+    robuxPrice: 2400,
     fruitType: "Logia",
     image: "Dough_Fruit.webp"
 },
 
 
-gas: {
-    value: 60000000,
+shadow: {
+    category: "fruit",
+    value: 6500000,
+    permanentValue: 3900000000,
+    demand: "5/10",
+    demandType: "Stable",
+    price: 2900000,
+    robuxPrice: 2425,
+    fruitType: "Natural",
+    image: "Shadow_Fruit.webp"
+},
+
+
+venom: {
+    category: "fruit",
+    value: 20000000,
+    permanentValue: 4300000000,
     demand: "8/10",
+    demandType: "Stable",
+    price: 3000000,
+    robuxPrice: 2450,
+    fruitType: "Natural",
+    image: "Venom_Fruit.webp"
+},
+
+
+gas: {
+    category: "fruit",
+    value: 60000000,
+    permanentValue: 4300000000,
+    demand: "8/10",
+    demandType: "Stable",
     price: 3200000,
-    priceType: "Beli",
+    robuxPrice: 2500,
     fruitType: "Logia",
     image: "Gas_Fruit.webp"
 },
 
 
-yeti: {
-    value: 120000000,
+spirit: {
+    category: "fruit",
+    value: 10000000,
+    permanentValue: 4700000000,
     demand: "7/10",
-    price: 5000000,
-    priceType: "Beli",
-    fruitType: "Beast",
-    image: "Yeti_Fruit.webp"
+    demandType: "Stable",
+    price: 3400000,
+    robuxPrice: 2550,
+    fruitType: "Natural",
+    image: "Spirit_Fruit.webp"
 },
 
 
 tiger: {
+    category: "fruit",
     value: 130000000,
+    permanentValue: "N/A",
     demand: "8/10",
+    demandType: "N/A",
     price: 5000000,
-    priceType: "Beli",
+    robuxPrice: 3000,
     fruitType: "Beast",
     image: "Tiger_Fruit.webp"
 },
 
 
-control: {
-    value: 160000000,
-    demand: "9/10",
-    price: 9000000,
-    priceType: "Beli",
-    fruitType: "Natural",
-    image: "Control_Fruit.webp"
+yeti: {
+    category: "fruit",
+    value: 120000000,
+    permanentValue: "N/A",
+    demand: "7/10",
+    demandType: "N/A",
+    price: 5000000,
+    robuxPrice: 3000,
+    fruitType: "Beast",
+    image: "Yeti_Fruit.webp"
 },
 
 
 kitsune: {
+    category: "fruit",
     value: 640000000,
+    permanentValue: 6200000000,
     demand: "10/10",
+    demandType: "Overpaid",
     price: 8000000,
-    priceType: "Beli",
+    robuxPrice: 4000,
     fruitType: "Beast",
     image: "Kitsune_Fruit.webp"
 },
 
 
+control: {
+    category: "fruit",
+    value: 160000000,
+    permanentValue: 6200000000,
+    demand: "10/10",
+    demandType: "Overpaid",
+    price: 9000000,
+    robuxPrice: 4000,
+    fruitType: "Natural",
+    image: "Control_Fruit.webp"
+},
+
+
 "east dragon": {
-    value: 3360000000,
+    category: "fruit",
+    value: 3400000000,
+    permanentValue: 7100000000,
     demand: "7/10",
+    demandType: "Overpaid",
     price: 15000000,
-    priceType: "Beli",
+    robuxPrice: 5000,
     fruitType: "Beast",
     image: "East_Dragon.webp"
 },
 
 
 "west dragon": {
-    value: 3910000000,
-    demand: "7/10",
+    category: "fruit",
+    value: 3900000000,
+    permanentValue: 7100000000,
+    demand: "10/10",
+    demandType: "Overpaid",
     price: 15000000,
-    priceType: "Beli",
+    robuxPrice: 5000,
     fruitType: "Beast",
     image: "West_Dragon.webp"
 },
 
+
+
 /* ================================
    LIMITED ITEMS
-   NO IMAGES
+   NO PERMANENT ROBUX FRUIT PRICE
 ================================ */
 
 
 "permanent dragon token": {
+    category: "limited",
     value: "N/A",
+    permanentValue: "N/A",
     demand: "6/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1294,8 +1457,11 @@ kitsune: {
 
 
 "doghouse frame break": {
+    category: "limited",
     value: 6990000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1303,8 +1469,11 @@ kitsune: {
 
 
 "rabid dog blade": {
-    value: 6240000000,
-    demand: "10/10",
+    category: "limited",
+    value: 6200000000,
+    permanentValue: "N/A",
+    demand: "8/10",
+    demandType: "Stable",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1312,8 +1481,11 @@ kitsune: {
 
 
 "dog blade": {
+    category: "limited",
     value: 580000000,
+    permanentValue: "N/A",
     demand: "8/10",
+    demandType: "Stable",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1321,17 +1493,35 @@ kitsune: {
 
 
 "fiend yeti": {
+    category: "limited",
     value: 960000000,
+    permanentValue: "N/A",
     demand: "9/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
 },
 
 
-"galaxy empyrean kitsune": {
-    value: 11960000000,
+"empyrean kitsune": {
+    category: "limited",
+    value: 9900000000,
+    permanentValue: 9900000000,
     demand: "10/10",
+    demandType: "Overpaid",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"galaxy kitsune": {
+    category: "limited",
+    value: 14300000000,
+    permanentValue: 14300000000,
+    demand: "10/10",
+    demandType: "Overpaid",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1339,8 +1529,11 @@ kitsune: {
 
 
 "ember west dragon": {
+    category: "limited",
     value: 7100000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1348,17 +1541,23 @@ kitsune: {
 
 
 "crimson kitsune": {
+    category: "limited",
     value: 8700000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: 2000,
     priceType: "Robux",
     fruitType: "N/A"
 },
 
 
-"meme": {
+meme: {
+    category: "limited",
     value: 4610000000,
+    permanentValue: "N/A",
     demand: "7/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1366,8 +1565,11 @@ kitsune: {
 
 
 "divine portal": {
+    category: "limited",
     value: 1670000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1375,8 +1577,11 @@ kitsune: {
 
 
 "purple lightning": {
+    category: "limited",
     value: 5340000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1384,8 +1589,11 @@ kitsune: {
 
 
 parrot: {
+    category: "limited",
     value: "N/A",
+    permanentValue: "N/A",
     demand: "1/10",
+    demandType: "N/A",
     price: 499,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1393,8 +1601,11 @@ parrot: {
 
 
 "red lightning": {
-    value: 2880000000,
+    category: "limited",
+    value: 3500000000,
+    permanentValue: 3500000000,
     demand: "10/10",
+    demandType: "Overpaid",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1402,8 +1613,11 @@ parrot: {
 
 
 "yellow lightning": {
+    category: "limited",
     value: 1760000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1411,8 +1625,11 @@ parrot: {
 
 
 "green lightning": {
+    category: "limited",
     value: 410000000,
+    permanentValue: "N/A",
     demand: "7/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1420,8 +1637,11 @@ parrot: {
 
 
 werewolf: {
+    category: "limited",
     value: 1060000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1429,8 +1649,11 @@ werewolf: {
 
 
 "rose quartz diamond": {
+    category: "limited",
     value: 350000000,
+    permanentValue: "N/A",
     demand: "7/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1438,8 +1661,11 @@ werewolf: {
 
 
 "emerald diamond": {
+    category: "limited",
     value: 220000000,
+    permanentValue: "N/A",
     demand: "5/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1447,8 +1673,11 @@ werewolf: {
 
 
 "topaz diamond": {
+    category: "limited",
     value: 220000000,
+    permanentValue: "N/A",
     demand: "5/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1456,8 +1685,11 @@ werewolf: {
 
 
 "ruby diamond": {
+    category: "limited",
     value: 160000000,
+    permanentValue: "N/A",
     demand: "5/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1465,8 +1697,11 @@ werewolf: {
 
 
 "dragon token": {
+    category: "limited",
     value: "N/A",
+    permanentValue: "N/A",
     demand: "4/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1474,8 +1709,11 @@ werewolf: {
 
 
 eclipse: {
+    category: "limited",
     value: "N/A",
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1483,8 +1721,11 @@ eclipse: {
 
 
 "super spirit pain": {
+    category: "limited",
     value: 3300000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1492,8 +1733,11 @@ eclipse: {
 
 
 "torment pain": {
-    value: 160000000,
-    demand: "6/10",
+    category: "limited",
+    value: 180000000,
+    permanentValue: "N/A",
+    demand: "3/10",
+    demandType: "Stable",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1501,8 +1745,11 @@ eclipse: {
 
 
 "sadness pain": {
+    category: "limited",
     value: 860000000,
+    permanentValue: "N/A",
     demand: "7/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1510,8 +1757,11 @@ eclipse: {
 
 
 "frustration pain": {
+    category: "limited",
     value: 900000000,
+    permanentValue: "N/A",
     demand: "8/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1519,8 +1769,11 @@ eclipse: {
 
 
 "celestial pain": {
+    category: "limited",
     value: 1020000000,
+    permanentValue: "N/A",
     demand: "8/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1528,8 +1781,11 @@ eclipse: {
 
 
 "eagle requiem": {
+    category: "limited",
     value: 160000000,
+    permanentValue: "N/A",
     demand: "4/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1537,8 +1793,11 @@ eclipse: {
 
 
 "eagle glacier": {
+    category: "limited",
     value: 20000000,
-    demand: "2/10",
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "Stable",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1546,8 +1805,11 @@ eclipse: {
 
 
 "eagle matrix": {
+    category: "limited",
     value: 250000000,
+    permanentValue: "N/A",
     demand: "5/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1555,8 +1817,11 @@ eclipse: {
 
 
 "celebration bomb": {
+    category: "limited",
     value: 10000000,
+    permanentValue: "N/A",
     demand: "2/10",
+    demandType: "Stable",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1564,8 +1829,11 @@ eclipse: {
 
 
 "azura bomb": {
+    category: "limited",
     value: 640000000,
+    permanentValue: "N/A",
     demand: "6/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1573,8 +1841,11 @@ eclipse: {
 
 
 "thermite bomb": {
+    category: "limited",
     value: 580000000,
+    permanentValue: "N/A",
     demand: "6/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1582,8 +1853,11 @@ eclipse: {
 
 
 "nuclear bomb": {
+    category: "limited",
     value: 610000000,
+    permanentValue: "N/A",
     demand: "6/10",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1591,8 +1865,11 @@ eclipse: {
 
 
 "orange portal": {
+    category: "limited",
     value: "N/A",
+    permanentValue: "N/A",
     demand: "SOON",
+    demandType: "N/A",
     price: "N/A",
     priceType: "Robux",
     fruitType: "N/A"
@@ -1602,13 +1879,16 @@ eclipse: {
 
 /* ================================
    GAMEPASSES
-   NO IMAGES
+   NO FRUIT PERMANENT PRICE
 ================================ */
 
 
 "fruit notifier": {
+    category: "gamepass",
     value: 4790000000,
+    permanentValue: "N/A",
     demand: "9/10",
+    demandType: "N/A",
     price: 2700,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1616,8 +1896,11 @@ eclipse: {
 
 
 "dark blade": {
-    value: 1020000000,
+    category: "gamepass",
+    value: 1100000000,
+    permanentValue: "N/A",
     demand: "9/10",
+    demandType: "Stable",
     price: 1200,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1625,8 +1908,11 @@ eclipse: {
 
 
 "mythical scrolls": {
-    value: 1590000000,
+    category: "gamepass",
+    value: 2400000000,
+    permanentValue: "N/A",
     demand: "4/10",
+    demandType: "Stable",
     price: 1500,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1634,8 +1920,11 @@ eclipse: {
 
 
 "legendary scrolls": {
+    category: "gamepass",
     value: 680000000,
+    permanentValue: "N/A",
     demand: "3/10",
+    demandType: "N/A",
     price: 800,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1643,8 +1932,11 @@ eclipse: {
 
 
 "+1 fruit storage": {
+    category: "gamepass",
     value: 450000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: 400,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1652,8 +1944,11 @@ eclipse: {
 
 
 "2x mastery": {
+    category: "gamepass",
     value: 450000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: 450,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1661,8 +1956,11 @@ eclipse: {
 
 
 "2x money": {
+    category: "gamepass",
     value: 450000000,
+    permanentValue: "N/A",
     demand: "10/10",
+    demandType: "N/A",
     price: 450,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1670,8 +1968,11 @@ eclipse: {
 
 
 "2x boss drops": {
+    category: "gamepass",
     value: 300000000,
+    permanentValue: "N/A",
     demand: "8/10",
+    demandType: "N/A",
     price: 350,
     priceType: "Robux",
     fruitType: "N/A"
@@ -1679,12 +1980,16 @@ eclipse: {
 
 
 "fast boats": {
+    category: "gamepass",
     value: 300000000,
+    permanentValue: "N/A",
     demand: "9/10",
+    demandType: "N/A",
     price: 350,
     priceType: "Robux",
     fruitType: "N/A"
 }
+
 
 };
 
@@ -1697,6 +2002,9 @@ eclipse: {
 
 const aliases = {
 
+
+    /* DRAGONS */
+
     "dragon west":
         "west dragon",
 
@@ -1704,6 +2012,9 @@ const aliases = {
         "west dragon",
 
     "west drag":
+        "west dragon",
+
+    "westdragon":
         "west dragon",
 
     "dragon east":
@@ -1715,11 +2026,23 @@ const aliases = {
     "east drag":
         "east dragon",
 
+    "eastdragon":
+        "east dragon",
+
+
+    /* T-REX */
+
     "trex":
         "t-rex",
 
     "t rex":
         "t-rex",
+
+    "t.rex":
+        "t-rex",
+
+
+    /* BUDDHA */
 
     "budha":
         "buddha",
@@ -1727,17 +2050,56 @@ const aliases = {
     "buda":
         "buddha",
 
+
+    /* KITSUNE */
+
     "kit":
         "kitsune",
 
     "kitsu":
         "kitsune",
 
-    "meme":
-        "meme-meme",
+
+    /* MEME */
+
+    "meme-meme":
+        "meme",
+
+    "meme meme":
+        "meme",
+
+    "meme fruit":
+        "meme",
+
+    "meme-meme fruit":
+        "meme",
+
+
+    /* LIMITED */
 
     "rabid dog":
         "rabid dog blade",
+
+    "rabid":
+        "rabid dog blade",
+
+    "rabidblade":
+        "rabid dog blade",
+
+    "dogblade":
+        "dog blade",
+
+    "redlightning":
+        "red lightning",
+
+    "glacier eagle":
+        "eagle glacier",
+
+    "glacier":
+        "eagle glacier",
+
+
+    /* GAMEPASSES */
 
     "storage":
         "+1 fruit storage",
@@ -1745,17 +2107,52 @@ const aliases = {
     "fruit storage":
         "+1 fruit storage",
 
+    "1 fruit storage":
+        "+1 fruit storage",
+
+    "+1 storage":
+        "+1 fruit storage",
+
     "boss drops":
+        "2x boss drops",
+
+    "2x drops":
         "2x boss drops",
 
     "money":
         "2x money",
 
     "mastery":
-        "2x mastery"
+        "2x mastery",
+
+    "boats":
+        "fast boats",
+
+    "mythical scroll":
+        "mythical scrolls",
+
+
+    /* EMPYREAN KITSUNE */
+
+    "emperion kitsune":
+        "empyrean kitsune",
+
+    "emp kitsune":
+        "empyrean kitsune",
+
+    "empyrean":
+        "empyrean kitsune",
+
+
+    /* GALAXY KITSUNE */
+
+    "galaxy":
+        "galaxy kitsune",
+
+    "galaxy kit":
+        "galaxy kitsune"
+
 };
-
-
 
 /* ================================
    CHECK VALUE
@@ -1776,17 +2173,25 @@ function checkValue() {
         document
             .getElementById("result")
             .innerHTML = `
+
                 <p class="not-found">
                     Please enter an item name.
                 </p>
+
             `;
 
         return;
     }
 
 
+    /* ================================
+       USE ALIASES
+    ================================ */
+
     if (aliases[search]) {
-        search = aliases[search];
+
+        search =
+            aliases[search];
     }
 
 
@@ -1810,6 +2215,7 @@ function checkValue() {
                         Choose the version you want to check.
                     </p>
 
+
                     <div class="dragon-options">
 
                         <button
@@ -1818,6 +2224,7 @@ function checkValue() {
                         >
                             East Dragon
                         </button>
+
 
                         <button
                             class="dragon-choice"
@@ -1835,6 +2242,10 @@ function checkValue() {
         return;
     }
 
+
+    /* ================================
+       EXACT MATCH
+    ================================ */
 
     if (items[search]) {
 
@@ -1854,8 +2265,10 @@ function checkValue() {
     const names =
         Object.keys(items);
 
+
     let closestName =
         null;
+
 
     let smallestDistance =
         Infinity;
@@ -1891,6 +2304,7 @@ function checkValue() {
     if (
         search.length >= 10
     ) {
+
         allowedMistakes =
             3;
     }
@@ -1936,6 +2350,7 @@ function chooseDragon(
         .getElementById("fruitInput")
         .value = dragonName;
 
+
     checkValue();
 }
 
@@ -1961,9 +2376,7 @@ function showResult(
         "";
 
 
-    if (
-        originalSearch
-    ) {
+    if (originalSearch) {
 
         suggestion = `
 
@@ -1981,13 +2394,15 @@ function showResult(
     }
 
 
+    /* ================================
+       IMAGE
+    ================================ */
+
     let imageHTML =
         "";
 
 
-    if (
-        item.image
-    ) {
+    if (item.image) {
 
         imageHTML = `
 
@@ -2001,6 +2416,163 @@ function showResult(
         `;
     }
 
+
+    /* ================================
+       PERMANENT VALUE ROW
+    ================================ */
+
+    let permanentValueHTML =
+        "";
+
+
+    if (
+        item.category === "fruit"
+    ) {
+
+        permanentValueHTML = `
+
+            <div class="info-row">
+
+                <span class="label">
+                    Permanent Value
+                </span>
+
+                <strong class="permanent-value">
+
+                    ${formatValue(
+                        item.permanentValue
+                    )}
+
+                </strong>
+
+            </div>
+
+        `;
+    }
+
+
+    /* ================================
+       NORMAL FRUIT PRICES
+    ================================ */
+
+    let fruitPriceHTML =
+        "";
+
+
+    if (
+        item.category === "fruit"
+    ) {
+
+        fruitPriceHTML = `
+
+            <div class="info-row">
+
+                <span class="label">
+                    Beli Price
+                </span>
+
+                <strong class="price">
+
+                    ${formatBeliPrice(
+                        item.price
+                    )}
+
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Permanent Price
+                </span>
+
+                <strong class="robux-price">
+
+                    ${formatRobuxPrice(
+                        item.robuxPrice
+                    )}
+
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Fruit Type
+                </span>
+
+                <strong class="fruit-type">
+                    ${item.fruitType}
+                </strong>
+
+            </div>
+
+        `;
+    }
+
+
+    /* ================================
+       LIMITED / GAMEPASS PRICE
+    ================================ */
+
+    let specialPriceHTML =
+        "";
+
+
+    if (
+        item.category !== "fruit"
+    ) {
+
+        specialPriceHTML = `
+
+            <div class="info-row">
+
+                <span class="label">
+                    Price
+                </span>
+
+                <strong class="price">
+
+                    ${formatSpecialPrice(
+                        item.price,
+                        item.priceType
+                    )}
+
+                </strong>
+
+            </div>
+
+        `;
+    }
+
+
+    /* ================================
+       DEMAND DISPLAY
+    ================================ */
+
+    let demandDisplay =
+        item.demand;
+
+
+    if (
+        item.demandType &&
+        item.demandType !== "N/A"
+    ) {
+
+        demandDisplay =
+            item.demand +
+            " - " +
+            item.demandType;
+    }
+
+
+    /* ================================
+       RESULT CARD
+    ================================ */
 
     result.innerHTML = `
 
@@ -2021,20 +2593,31 @@ function showResult(
             <div class="item-info">
 
 
+                <!-- PHYSICAL VALUE -->
+
                 <div class="info-row">
 
                     <span class="label">
-                        Value
+                        Physical Value
                     </span>
 
-                    <strong class="value">
+                    <strong class="physical-value">
+
                         ${formatValue(
                             item.value
                         )}
+
                     </strong>
 
                 </div>
 
+
+                <!-- PERMANENT VALUE -->
+
+                ${permanentValueHTML}
+
+
+                <!-- DEMAND -->
 
                 <div class="info-row">
 
@@ -2043,40 +2626,20 @@ function showResult(
                     </span>
 
                     <strong class="demand">
-                        ${item.demand}
+                        ${demandDisplay}
                     </strong>
 
                 </div>
 
 
-                <div class="info-row">
+                <!-- NORMAL FRUIT PRICES -->
 
-                    <span class="label">
-                        ${item.priceType}
-                        Price
-                    </span>
-
-                    <strong class="price">
-                        ${formatPrice(
-                            item.price,
-                            item.priceType
-                        )}
-                    </strong>
-
-                </div>
+                ${fruitPriceHTML}
 
 
-                <div class="info-row">
+                <!-- LIMITED / GAMEPASS PRICE -->
 
-                    <span class="label">
-                        Fruit Type
-                    </span>
-
-                    <strong class="fruit-type">
-                        ${item.fruitType}
-                    </strong>
-
-                </div>
+                ${specialPriceHTML}
 
 
             </div>
@@ -2100,10 +2663,17 @@ function formatValue(
 
     if (
         value === "N/A"
+        ||
+        value === undefined
+        ||
+        value === null
     ) {
+
         return "N/A";
     }
 
+
+    /* BILLIONS */
 
     if (
         value >=
@@ -2123,6 +2693,8 @@ function formatValue(
     }
 
 
+    /* MILLIONS */
+
     if (
         value >=
         1000000
@@ -2140,6 +2712,8 @@ function formatValue(
         + "M";
     }
 
+
+    /* THOUSANDS */
 
     if (
         value >=
@@ -2165,18 +2739,83 @@ function formatValue(
 
 
 /* ================================
-   FORMAT PRICE
+   FORMAT BELI PRICE
 ================================ */
 
 
-function formatPrice(
+function formatBeliPrice(
+    price
+) {
+
+    if (
+        price === "N/A"
+        ||
+        price === undefined
+        ||
+        price === null
+    ) {
+
+        return "N/A";
+    }
+
+
+    return (
+        "$" +
+        Number(price)
+            .toLocaleString()
+    );
+}
+
+
+
+/* ================================
+   FORMAT PERMANENT ROBUX PRICE
+================================ */
+
+
+function formatRobuxPrice(
+    price
+) {
+
+    if (
+        price === "N/A"
+        ||
+        price === undefined
+        ||
+        price === null
+    ) {
+
+        return "N/A";
+    }
+
+
+    return (
+        "R$ " +
+        Number(price)
+            .toLocaleString()
+    );
+}
+
+
+
+/* ================================
+   FORMAT SPECIAL ITEM PRICE
+================================ */
+
+
+function formatSpecialPrice(
     price,
     type
 ) {
 
     if (
         price === "N/A"
+        ||
+        price === undefined
+        ||
+        price === null
     ) {
+
         return "N/A";
     }
 
@@ -2185,7 +2824,20 @@ function formatPrice(
         typeof price ===
         "string"
     ) {
+
         return price;
+    }
+
+
+    if (
+        type === "Robux"
+    ) {
+
+        return (
+            "R$ " +
+            Number(price)
+                .toLocaleString()
+        );
     }
 
 
@@ -2195,13 +2847,15 @@ function formatPrice(
 
         return (
             "$" +
-            price.toLocaleString()
+            Number(price)
+                .toLocaleString()
         );
     }
 
 
     return (
-        price.toLocaleString()
+        Number(price)
+            .toLocaleString()
     );
 }
 
@@ -2217,22 +2871,30 @@ function formatName(
 ) {
 
     return name
+
         .split(" ")
+
         .map(
+
             word =>
+
                 word
                     .charAt(0)
                     .toUpperCase()
+
                 +
+
                 word.slice(1)
+
         )
+
         .join(" ");
 }
 
 
 
 /* ================================
-   TYPO MATCHING
+   LEVENSHTEIN TYPO MATCHING
 ================================ */
 
 
@@ -2305,6 +2967,7 @@ function levenshteinDistance(
                         matrix[i - 1]
                               [j]
                         + 1
+
                     );
             }
         }
@@ -2328,6 +2991,7 @@ document
     .getElementById(
         "fruitInput"
     )
+
     .addEventListener(
         "keydown",
 
@@ -2340,6 +3004,7 @@ document
 
                 checkValue();
             }
+
         }
     );
 
