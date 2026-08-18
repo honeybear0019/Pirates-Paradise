@@ -1490,29 +1490,29 @@
         ========================= */
 
         .item-list {
-            padding:
-                10px 20px
-                20px;
+    padding:
+        10px 20px
+        20px;
 
-            overflow-y:
-                auto;
+    overflow-y: auto;
 
-            display:
-                grid;
+    display: grid;
 
-            grid-template-columns:
-                repeat(
-                    3,
-                    minmax(
-                        0,
-                        1fr
-                    )
-                );
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
-            gap:
-                11px;
-        }
+    gap: 11px;
 
+    /* IMPORTANT FIX */
+    flex: 1;
+    min-height: 0;
+}
 
         .picker-item {
             min-height:
@@ -1638,25 +1638,32 @@
         ========================= */
 
         .mode-panel {
-            display:
-                none;
+    display: none;
 
-            padding:
-                18px 20px
-                20px;
+    padding:
+        18px 20px
+        20px;
 
-            border-top:
-                1px solid
-                #8e6035;
+    border-top:
+        1px solid
+        #8e6035;
 
-            background:
-                rgba(
-                    29,
-                    18,
-                    10,
-                    0.35
-                );
-        }
+    background:
+        rgba(
+            29,
+            18,
+            10,
+            0.95
+        );
+
+    /* IMPORTANT FIX */
+    flex-shrink: 0;
+}
+
+
+.mode-panel.open {
+    display: block;
+}
 
 
         .mode-panel.open {
@@ -4711,21 +4718,60 @@ function renderItemPicker() {
 ================================ */
 
 
-function choosePickerItem(
-    itemName
-) {
+function choosePickerItem(itemName) {
 
     selectedItemName =
         itemName;
 
-
     const item =
         items[itemName];
-
 
     selectedMode =
         "physical";
 
+
+    /* ================================
+       LIMITED / GAMEPASS
+       ADD IMMEDIATELY
+    ================================ */
+
+    if (
+        item.category !==
+        "fruit"
+    ) {
+
+        const targetArray =
+            getSideArray(
+                activeSide
+            );
+
+
+        targetArray[
+            activeSlotIndex
+        ] = {
+
+            name:
+                itemName,
+
+            mode:
+                "physical"
+
+        };
+
+
+        closeItemModal();
+
+        renderEverything();
+
+        return;
+    }
+
+
+
+    /* ================================
+       NORMAL FRUIT
+       SHOW PHYSICAL / PERMANENT
+    ================================ */
 
     document
         .getElementById(
@@ -4757,7 +4803,6 @@ function choosePickerItem(
             formatValue(
                 item.permanentValue
             );
-
 
 
     const physicalButton =
@@ -4794,74 +4839,50 @@ function choosePickerItem(
 
 
 
-    /* ================================
-       NORMAL FRUIT
-    ================================ */
+    /* Disable PERM if value is unknown */
 
     if (
-        item.category ===
-        "fruit"
+        typeof item.permanentValue !==
+        "number"
     ) {
 
-
-        if (
-            typeof item.permanentValue !==
-            "number"
-        ) {
-
-            permanentButton
-                .classList
-                .add(
-                    "disabled"
-                );
-        }
-
-
-        document
-            .getElementById(
-                "modePanel"
-            )
+        permanentButton
             .classList
             .add(
-                "open"
+                "disabled"
             );
-
-
-        return;
     }
 
 
 
-    /* ================================
-       LIMITED / GAMEPASS
-
-       No Physical/Permanent choice.
-       Add immediately.
-    ================================ */
-
-    const targetArray =
-        getSideArray(
-            activeSide
+    const modePanel =
+        document.getElementById(
+            "modePanel"
         );
 
 
-    targetArray[
-        activeSlotIndex
-    ] = {
-
-        name:
-            itemName,
-
-        mode:
-            "physical"
-
-    };
+    modePanel
+        .classList
+        .add(
+            "open"
+        );
 
 
-    closeItemModal();
+    /* Make sure the panel becomes visible */
 
-    renderEverything();
+    setTimeout(
+        () => {
+
+            modePanel.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+
+        },
+        50
+    );
 }
+
 
 
 
