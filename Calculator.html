@@ -1,0 +1,6244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Pirate's Paradise - Trade Calculator
+    </title>
+
+    <meta
+        name="description"
+        content="Compare Blox Fruits trades using physical values, permanent values, demand and in-game trade requirements."
+    >
+
+    <link
+        rel="icon"
+        type="image/webp"
+        href="PP.webp"
+    >
+
+
+    <style>
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #d6b77c 0%,
+                    #b8925b 35%,
+                    #765333 70%,
+                    #24180f 100%
+                );
+
+            background-attachment: fixed;
+        }
+
+
+        button,
+        input {
+            font-family:
+                inherit;
+        }
+
+
+        button {
+            cursor:
+                pointer;
+        }
+
+
+
+        /* =========================
+           MAIN PAGE
+        ========================= */
+
+        .page {
+            width:
+                94%;
+
+            max-width:
+                1400px;
+
+            margin:
+                0 auto;
+
+            padding:
+                55px 20px
+                90px;
+        }
+
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .calculator-header {
+            width:
+                100%;
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            text-align:
+                center;
+
+            padding:
+                42px 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5f4025,
+                    #8b5a2b,
+                    #c3914c
+                );
+
+            border:
+                2px solid
+                #d6ad60;
+
+            border-radius:
+                28px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                ),
+                inset
+                0 1px 0
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+        }
+
+
+        .calculator-header::before {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                420px;
+
+            height:
+                420px;
+
+            right:
+                70px;
+
+            top:
+                -310px;
+
+            background:
+                rgba(
+                    255,
+                    220,
+                    150,
+                    0.08
+                );
+
+            transform:
+                rotate(45deg);
+        }
+
+
+        .calculator-header::after {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                280px;
+
+            height:
+                280px;
+
+            left:
+                50px;
+
+            bottom:
+                -230px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+
+            transform:
+                rotate(45deg);
+        }
+
+
+        .calculator-header h1 {
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            margin:
+                0 0 10px;
+
+            font-size:
+                48px;
+
+            text-shadow:
+                0 4px 8px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                );
+        }
+
+
+        .calculator-header p {
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            margin:
+                0 auto;
+
+            max-width:
+                760px;
+
+            color:
+                #f7ead4;
+
+            font-size:
+                17px;
+
+            line-height:
+                1.6;
+
+            font-weight:
+                600;
+        }
+
+
+
+        /* =========================
+           TRADE LAYOUT
+        ========================= */
+
+        .trade-board {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap:
+                28px;
+
+            margin-top:
+                38px;
+        }
+
+
+
+        /* =========================
+           TRADE SIDE
+        ========================= */
+
+        .trade-side {
+            padding:
+                25px;
+
+            background:
+                rgba(
+                    74,
+                    48,
+                    28,
+                    0.82
+                );
+
+            border:
+                2px solid
+                #c9944c;
+
+            border-radius:
+                24px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                );
+
+            backdrop-filter:
+                blur(6px);
+        }
+
+
+        .side-heading {
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .side-title {
+            margin:
+                0;
+
+            font-size:
+                28px;
+        }
+
+
+        .side-total {
+            padding:
+                8px 13px;
+
+            background:
+                rgba(
+                    30,
+                    18,
+                    10,
+                    0.5
+                );
+
+            border:
+                1px solid
+                #9c6d3d;
+
+            border-radius:
+                10px;
+
+            color:
+                #ffd36a;
+
+            font-size:
+                15px;
+
+            font-weight:
+                bold;
+        }
+
+
+
+        /* =========================
+           SLOTS
+        ========================= */
+
+        .slots-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap:
+                15px;
+        }
+
+
+        .trade-slot {
+            min-height:
+                185px;
+
+            position:
+                relative;
+
+            border:
+                2px solid
+                #8f6237;
+
+            border-radius:
+                18px;
+
+            overflow:
+                visible;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #3c2818,
+                    #57371e,
+                    #704824
+                );
+
+            box-shadow:
+                0 8px 20px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.28
+                );
+
+            transition:
+                0.2s;
+        }
+
+
+        .trade-slot:hover {
+            border-color:
+                #d9ac60;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+
+        /* =========================
+           EMPTY SLOT
+        ========================= */
+
+        .empty-slot {
+            width:
+                100%;
+
+            min-height:
+                181px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                8px;
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            color:
+                #e8cfaa;
+        }
+
+
+        .plus-icon {
+            width:
+                52px;
+
+            height:
+                52px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                2px solid
+                #c9944c;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(
+                    139,
+                    90,
+                    43,
+                    0.5
+                );
+
+            color:
+                white;
+
+            font-size:
+                34px;
+
+            line-height:
+                1;
+        }
+
+
+        .empty-slot span {
+            font-size:
+                14px;
+
+            color:
+                #d8c3a5;
+        }
+
+
+
+        /* =========================
+           SELECTED ITEM CARD
+        ========================= */
+
+        .selected-item {
+            min-height:
+                181px;
+
+            position:
+                relative;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                14px 12px
+                13px;
+
+            text-align:
+                center;
+        }
+
+
+        .selected-item img {
+            width:
+                92px;
+
+            height:
+                92px;
+
+            object-fit:
+                contain;
+
+            margin-bottom:
+                6px;
+
+            filter:
+                drop-shadow(
+                    0 6px 7px
+                    rgba(
+                        0,
+                        0,
+                        0,
+                        0.35
+                    )
+                );
+        }
+
+
+        .selected-name {
+            max-width:
+                100%;
+
+            margin:
+                0;
+
+            font-size:
+                16px;
+
+            font-weight:
+                bold;
+
+            white-space:
+                nowrap;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+        }
+
+
+        .selected-value {
+            margin-top:
+                5px;
+
+            color:
+                #ffd36a;
+
+            font-size:
+                17px;
+
+            font-weight:
+                bold;
+        }
+
+
+        .perm-badge {
+            margin-top:
+                6px;
+
+            padding:
+                3px 8px;
+
+            border:
+                1px solid
+                #8fd5ff;
+
+            border-radius:
+                999px;
+
+            color:
+                #a9e1ff;
+
+            background:
+                rgba(
+                    72,
+                    145,
+                    194,
+                    0.14
+                );
+
+            font-size:
+                10px;
+
+            font-weight:
+                bold;
+
+            letter-spacing:
+                0.5px;
+        }
+
+
+
+        /* =========================
+           REMOVE BUTTON
+        ========================= */
+
+        .remove-item {
+            position:
+                absolute;
+
+            top:
+                7px;
+
+            right:
+                7px;
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                0;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(
+                    20,
+                    12,
+                    7,
+                    0.65
+                );
+
+            color:
+                #f3c7ba;
+
+            font-size:
+                15px;
+
+            z-index:
+                10;
+        }
+
+
+        .remove-item:hover {
+            background:
+                rgba(
+                    110,
+                    36,
+                    27,
+                    0.9
+                );
+        }
+
+
+
+        /* =========================
+           INFO BUTTON
+        ========================= */
+
+        .info-button {
+            position:
+                absolute;
+
+            left:
+                8px;
+
+            top:
+                8px;
+
+            width:
+                26px;
+
+            height:
+                26px;
+
+            padding:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                #c9944c;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(
+                    36,
+                    24,
+                    14,
+                    0.75
+                );
+
+            color:
+                #f7dfb7;
+
+            font-size:
+                13px;
+
+            font-weight:
+                bold;
+
+            z-index:
+                10;
+        }
+
+
+
+        /* =========================
+           HOVER / TAP INFO CARD
+        ========================= */
+
+        .item-tooltip {
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            bottom:
+                calc(
+                    100% + 10px
+                );
+
+            transform:
+                translateX(-50%);
+
+            width:
+                220px;
+
+            padding:
+                14px;
+
+            display:
+                none;
+
+            text-align:
+                left;
+
+            background:
+                #26170d;
+
+            border:
+                1px solid
+                #c9944c;
+
+            border-radius:
+                12px;
+
+            box-shadow:
+                0 12px 28px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.48
+                );
+
+            z-index:
+                100;
+        }
+
+
+        .trade-slot:hover
+        .item-tooltip {
+            display:
+                block;
+        }
+
+
+        .item-tooltip.visible {
+            display:
+                block;
+        }
+
+
+        .tooltip-title {
+            margin:
+                0 0 9px;
+
+            font-size:
+                16px;
+
+            color:
+                white;
+        }
+
+
+        .tooltip-row {
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+            padding:
+                5px 0;
+
+            color:
+                #dac6a8;
+
+            font-size:
+                12px;
+        }
+
+
+        .tooltip-row strong {
+            color:
+                #ffd36a;
+
+            text-align:
+                right;
+        }
+
+
+
+        /* =========================
+           ANALYSIS PANEL
+        ========================= */
+
+        .analysis-panel {
+            margin-top:
+                32px;
+
+            padding:
+                28px;
+
+            border:
+                2px solid
+                #c9944c;
+
+            border-radius:
+                24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(
+                        66,
+                        42,
+                        24,
+                        0.95
+                    ),
+                    rgba(
+                        93,
+                        59,
+                        30,
+                        0.95
+                    )
+                );
+
+            box-shadow:
+                0 14px 32px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                );
+        }
+
+
+        .analysis-title {
+            margin:
+                0 0 20px;
+
+            text-align:
+                center;
+
+            font-size:
+                27px;
+        }
+
+
+        .analysis-values {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap:
+                18px;
+        }
+
+
+        .analysis-box {
+            padding:
+                16px;
+
+            background:
+                rgba(
+                    29,
+                    18,
+                    10,
+                    0.42
+                );
+
+            border:
+                1px solid
+                #9c6d3d;
+
+            border-radius:
+                14px;
+
+            text-align:
+                center;
+        }
+
+
+        .analysis-box span {
+            display:
+                block;
+
+            color:
+                #d5c0a1;
+
+            font-size:
+                13px;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .analysis-box strong {
+            color:
+                #ffd36a;
+
+            font-size:
+                22px;
+        }
+
+
+        .trade-result {
+            margin-top:
+                22px;
+
+            padding:
+                17px;
+
+            text-align:
+                center;
+
+            border:
+                1px solid
+                #aa7844;
+
+            border-radius:
+                14px;
+
+            background:
+                rgba(
+                    24,
+                    15,
+                    9,
+                    0.42
+                );
+        }
+
+
+        .result-label {
+            color:
+                #ddc5a3;
+
+            font-size:
+                13px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                1px;
+        }
+
+
+        .result-status {
+            margin-top:
+                5px;
+
+            font-size:
+                31px;
+
+            font-weight:
+                bold;
+
+            color:
+                #ffd36a;
+        }
+
+
+        .result-detail {
+            margin-top:
+                6px;
+
+            color:
+                #e6d1b5;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.5;
+        }
+
+
+
+        /* =========================
+           IN-GAME CHECK
+        ========================= */
+
+        .ingame-check {
+            margin-top:
+                18px;
+
+            padding:
+                18px;
+
+            border:
+                1px solid
+                #9c6d3d;
+
+            border-radius:
+                14px;
+
+            background:
+                rgba(
+                    35,
+                    22,
+                    12,
+                    0.52
+                );
+        }
+
+
+        .ingame-check h3 {
+            margin:
+                0 0 12px;
+
+            font-size:
+                18px;
+        }
+
+
+        .ingame-row {
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            padding:
+                7px 0;
+
+            color:
+                #d8c4a6;
+
+            font-size:
+                14px;
+        }
+
+
+        .ingame-row strong {
+            color:
+                #ffd36a;
+
+            text-align:
+                right;
+        }
+
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-wrap {
+            margin-top:
+                30px;
+
+            text-align:
+                center;
+        }
+
+
+        .back-button {
+            background:
+                #6f4726;
+
+            color:
+                white;
+
+            border:
+                2px solid
+                #c9944c;
+
+            padding:
+                12px 24px;
+
+            border-radius:
+                10px;
+
+            font-size:
+                16px;
+
+            font-weight:
+                bold;
+
+            transition:
+                0.2s;
+        }
+
+
+        .back-button:hover {
+            background:
+                #8b5a2b;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.3
+                );
+        }
+
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay {
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                9999;
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+            background:
+                rgba(
+                    12,
+                    7,
+                    4,
+                    0.78
+                );
+
+            backdrop-filter:
+                blur(5px);
+        }
+
+
+        .modal-overlay.open {
+            display:
+                flex;
+        }
+
+
+        .item-modal {
+            width:
+                100%;
+
+            max-width:
+                720px;
+
+            max-height:
+                88vh;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            overflow:
+                hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #3d2818,
+                    #5b391e
+                );
+
+            border:
+                2px solid
+                #c9944c;
+
+            border-radius:
+                22px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.55
+                );
+        }
+
+
+        .modal-header {
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            padding:
+                20px 22px;
+
+            border-bottom:
+                1px solid
+                #8e6035;
+        }
+
+
+        .modal-header h2 {
+            margin:
+                0;
+
+            font-size:
+                25px;
+        }
+
+
+        .close-modal {
+            width:
+                34px;
+
+            height:
+                34px;
+
+            border:
+                1px solid
+                #9c6d3d;
+
+            border-radius:
+                50%;
+
+            background:
+                #2d1b10;
+
+            color:
+                white;
+
+            font-size:
+                17px;
+        }
+
+
+        .modal-search-wrap {
+            padding:
+                16px 20px
+                8px;
+        }
+
+
+        .modal-search {
+            width:
+                100%;
+
+            padding:
+                13px 15px;
+
+            border:
+                2px solid
+                #8f6237;
+
+            border-radius:
+                10px;
+
+            outline:
+                none;
+
+            background:
+                #2d1d12;
+
+            color:
+                white;
+
+            font-size:
+                16px;
+        }
+
+
+        .modal-search:focus {
+            border-color:
+                #e0b568;
+        }
+
+
+
+        /* =========================
+           CATEGORY FILTERS
+        ========================= */
+
+        .category-filters {
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+
+            padding:
+                10px 20px
+                13px;
+        }
+
+
+        .category-button {
+            padding:
+                7px 11px;
+
+            border:
+                1px solid
+                #8f6237;
+
+            border-radius:
+                999px;
+
+            background:
+                #3a2718;
+
+            color:
+                #e6d1b6;
+
+            font-size:
+                12px;
+        }
+
+
+        .category-button.active {
+            border-color:
+                #dfb362;
+
+            background:
+                #825326;
+
+            color:
+                white;
+        }
+
+
+
+        /* =========================
+           ITEM RESULTS
+        ========================= */
+
+        .item-list {
+            padding:
+                10px 20px
+                20px;
+
+            overflow-y:
+                auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap:
+                11px;
+        }
+
+
+        .picker-item {
+            min-height:
+                125px;
+
+            position:
+                relative;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+            padding:
+                10px;
+
+            border:
+                1px solid
+                #8e6138;
+
+            border-radius:
+                13px;
+
+            background:
+                #382518;
+
+            color:
+                white;
+
+            text-align:
+                center;
+
+            transition:
+                0.18s;
+        }
+
+
+        .picker-item:hover {
+            border-color:
+                #dfb362;
+
+            background:
+                #50321d;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .picker-item img {
+            width:
+                65px;
+
+            height:
+                65px;
+
+            object-fit:
+                contain;
+        }
+
+
+        .picker-name {
+            max-width:
+                100%;
+
+            font-size:
+                13px;
+
+            font-weight:
+                bold;
+
+            white-space:
+                nowrap;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+        }
+
+
+        .picker-value {
+            color:
+                #ffd36a;
+
+            font-size:
+                12px;
+
+            font-weight:
+                bold;
+        }
+
+
+        .picker-category {
+            color:
+                #c9b393;
+
+            font-size:
+                10px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.5px;
+        }
+
+
+
+        /* =========================
+           MODE SELECTOR
+        ========================= */
+
+        .mode-panel {
+            display:
+                none;
+
+            padding:
+                18px 20px
+                20px;
+
+            border-top:
+                1px solid
+                #8e6035;
+
+            background:
+                rgba(
+                    29,
+                    18,
+                    10,
+                    0.35
+                );
+        }
+
+
+        .mode-panel.open {
+            display:
+                block;
+        }
+
+
+        .mode-selected-name {
+            margin:
+                0 0 13px;
+
+            text-align:
+                center;
+
+            font-size:
+                20px;
+        }
+
+
+        .mode-options {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap:
+                10px;
+        }
+
+
+        .mode-option {
+            padding:
+                12px;
+
+            border:
+                2px solid
+                #8f6237;
+
+            border-radius:
+                12px;
+
+            background:
+                #372417;
+
+            color:
+                white;
+
+            text-align:
+                center;
+        }
+
+
+        .mode-option.active {
+            border-color:
+                #e0b568;
+
+            background:
+                #725029;
+        }
+
+
+        .mode-option.disabled {
+            opacity:
+                0.38;
+
+            cursor:
+                not-allowed;
+        }
+
+
+        .mode-option strong {
+            display:
+                block;
+
+            font-size:
+                14px;
+
+            margin-bottom:
+                4px;
+        }
+
+
+        .mode-option span {
+            color:
+                #d8c3a4;
+
+            font-size:
+                12px;
+        }
+
+
+        .confirm-add {
+            width:
+                100%;
+
+            margin-top:
+                12px;
+
+            padding:
+                12px;
+
+            border:
+                2px solid
+                #c9944c;
+
+            border-radius:
+                10px;
+
+            background:
+                #8b5a2b;
+
+            color:
+                white;
+
+            font-size:
+                16px;
+
+            font-weight:
+                bold;
+        }
+
+
+        .confirm-add:hover {
+            background:
+                #a66b32;
+        }
+
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (
+            max-width: 850px
+        ) {
+
+            .trade-board {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .analysis-values {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .page {
+                width:
+                    96%;
+
+                padding:
+                    30px 8px
+                    60px;
+            }
+
+
+            .calculator-header {
+                padding:
+                    35px 18px;
+
+                border-radius:
+                    20px;
+            }
+
+
+            .calculator-header h1 {
+                font-size:
+                    34px;
+            }
+
+
+            .calculator-header p {
+                font-size:
+                    14px;
+            }
+
+
+            .trade-side {
+                padding:
+                    18px 14px;
+            }
+
+
+            .side-heading {
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+
+
+            .slots-grid {
+                gap:
+                    10px;
+            }
+
+
+            .trade-slot {
+                min-height:
+                    160px;
+            }
+
+
+            .empty-slot {
+                min-height:
+                    156px;
+            }
+
+
+            .selected-item {
+                min-height:
+                    156px;
+            }
+
+
+            .selected-item img {
+                width:
+                    75px;
+
+                height:
+                    75px;
+            }
+
+
+            .item-list {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(
+                            0,
+                            1fr
+                        )
+                    );
+            }
+
+
+            .item-tooltip {
+                width:
+                    190px;
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="calculator-header">
+
+        <h1>
+            Trade Calculator
+        </h1>
+
+        <p>
+            Compare both sides using Pirate's Paradise trade values,
+            demand and Blox Fruits in-game trading requirements.
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         TRADE BOARD
+    ========================== -->
+
+    <div class="trade-board">
+
+
+        <!-- OFFER SIDE -->
+
+        <section class="trade-side">
+
+            <div class="side-heading">
+
+                <h2 class="side-title">
+                    Your Offer
+                </h2>
+
+                <div
+                    class="side-total"
+                    id="offerTotal"
+                >
+                    Total: 0
+                </div>
+
+            </div>
+
+
+            <div
+                class="slots-grid"
+                id="offerSlots"
+            ></div>
+
+        </section>
+
+
+
+        <!-- REQUEST SIDE -->
+
+        <section class="trade-side">
+
+            <div class="side-heading">
+
+                <h2 class="side-title">
+                    Their Offer
+                </h2>
+
+                <div
+                    class="side-total"
+                    id="requestTotal"
+                >
+                    Total: 0
+                </div>
+
+            </div>
+
+
+            <div
+                class="slots-grid"
+                id="requestSlots"
+            ></div>
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         TRADE ANALYSIS
+    ========================== -->
+
+    <section class="analysis-panel">
+
+        <h2 class="analysis-title">
+            Trade Analysis
+        </h2>
+
+
+        <div class="analysis-values">
+
+            <div class="analysis-box">
+
+                <span>
+                    Your Offer Value
+                </span>
+
+                <strong
+                    id="analysisOfferValue"
+                >
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="analysis-box">
+
+                <span>
+                    Their Offer Value
+                </span>
+
+                <strong
+                    id="analysisRequestValue"
+                >
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="trade-result">
+
+            <div class="result-label">
+                Market Result
+            </div>
+
+            <div
+                class="result-status"
+                id="marketResult"
+            >
+                Add Items
+            </div>
+
+            <div
+                class="result-detail"
+                id="marketResultDetail"
+            >
+                Add at least one item to both sides.
+            </div>
+
+        </div>
+
+
+        <div class="ingame-check">
+
+            <h3>
+                In-Game Trade Check
+            </h3>
+
+
+            <div class="ingame-row">
+
+                <span>
+                    Status
+                </span>
+
+                <strong
+                    id="gameTradeStatus"
+                >
+                    Waiting
+                </strong>
+
+            </div>
+
+
+            <div class="ingame-row">
+
+                <span>
+                    Price Difference
+                </span>
+
+                <strong
+                    id="gamePriceDifference"
+                >
+                    N/A
+                </strong>
+
+            </div>
+
+
+            <div class="ingame-row">
+
+                <span>
+                    Allowed Difference
+                </span>
+
+                <strong
+                    id="gameAllowedDifference"
+                >
+                    N/A
+                </strong>
+
+            </div>
+
+
+            <div class="ingame-row">
+
+                <span>
+                    Rule
+                </span>
+
+                <strong
+                    id="gameRuleReason"
+                >
+                    Add items
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <div class="back-wrap">
+
+        <button
+            class="back-button"
+            onclick="window.location.href='BloxFruits.html'"
+        >
+            ← Back to Blox Fruits
+        </button>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     ITEM PICKER MODAL
+========================== -->
+
+<div
+    class="modal-overlay"
+    id="itemModal"
+>
+
+
+    <div class="item-modal">
+
+
+        <div class="modal-header">
+
+            <h2>
+                Add Item
+            </h2>
+
+            <button
+                class="close-modal"
+                onclick="closeItemModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-search-wrap">
+
+            <input
+                type="text"
+                class="modal-search"
+                id="itemSearch"
+                placeholder="Search fruits, limiteds or gamepasses..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="category-filters">
+
+            <button
+                class="category-button active"
+                data-category="all"
+                onclick="setCategory('all', this)"
+            >
+                All
+            </button>
+
+
+            <button
+                class="category-button"
+                data-category="fruit"
+                onclick="setCategory('fruit', this)"
+            >
+                Fruits
+            </button>
+
+
+            <button
+                class="category-button"
+                data-category="limited"
+                onclick="setCategory('limited', this)"
+            >
+                Limiteds
+            </button>
+
+
+            <button
+                class="category-button"
+                data-category="gamepass"
+                onclick="setCategory('gamepass', this)"
+            >
+                Gamepasses
+            </button>
+
+        </div>
+
+
+        <div
+            class="item-list"
+            id="itemList"
+        ></div>
+
+
+
+        <!-- PHYSICAL / PERMANENT -->
+
+        <div
+            class="mode-panel"
+            id="modePanel"
+        >
+
+            <h3
+                class="mode-selected-name"
+                id="modeSelectedName"
+            >
+                Item
+            </h3>
+
+
+            <div class="mode-options">
+
+
+                <button
+                    class="mode-option active"
+                    id="physicalMode"
+                    onclick="selectMode('physical')"
+                >
+
+                    <strong>
+                        Physical
+                    </strong>
+
+                    <span
+                        id="physicalModeValue"
+                    >
+                        Value: N/A
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="mode-option"
+                    id="permanentMode"
+                    onclick="selectMode('permanent')"
+                >
+
+                    <strong>
+                        Permanent
+                    </strong>
+
+                    <span
+                        id="permanentModeValue"
+                    >
+                        Value: N/A
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+            <button
+                class="confirm-add"
+                onclick="confirmAddItem()"
+            >
+                Add to Trade
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* ================================
+   CALCULATOR STATE
+================================ */
+
+
+const offerItems =
+    [
+        null,
+        null,
+        null,
+        null
+    ];
+
+
+const requestItems =
+    [
+        null,
+        null,
+        null,
+        null
+    ];
+
+
+let activeSide =
+    null;
+
+
+let activeSlotIndex =
+    null;
+
+
+let selectedItemName =
+    null;
+
+
+let selectedMode =
+    "physical";
+
+
+let activeCategory =
+    "all";
+    /* ================================
+   ITEM DATABASE
+================================ */
+
+
+const items = {
+
+
+/* ================================
+   COMMON FRUITS
+================================ */
+
+
+rocket: {
+    category: "fruit",
+    value: 5000,
+    permanentValue: 10000000,
+    demand: "1/10",
+    demandType: "Stable",
+    price: 5000,
+    robuxPrice: 50,
+    fruitType: "Natural",
+    image: "Rocket_Fruit.webp"
+},
+
+
+spin: {
+    category: "fruit",
+    value: 7500,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 7500,
+    robuxPrice: 75,
+    fruitType: "Natural",
+    image: "Spin_Fruit.webp"
+},
+
+
+blade: {
+    category: "fruit",
+    value: 50000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 30000,
+    robuxPrice: 100,
+    fruitType: "Natural",
+    image: "Blade_Fruit.webp"
+},
+
+
+spring: {
+    category: "fruit",
+    value: 60000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 60000,
+    robuxPrice: 180,
+    fruitType: "Natural",
+    image: "Spring_Fruit.webp"
+},
+
+
+bomb: {
+    category: "fruit",
+    value: 80000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 80000,
+    robuxPrice: 220,
+    fruitType: "Natural",
+    image: "Bomb_Fruit.webp"
+},
+
+
+smoke: {
+    category: "fruit",
+    value: 100000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 100000,
+    robuxPrice: 250,
+    fruitType: "Logia",
+    image: "Smoke_Fruit.webp"
+},
+
+
+spike: {
+    category: "fruit",
+    value: 180000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 180000,
+    robuxPrice: 380,
+    fruitType: "Natural",
+    image: "Spike_Fruit.webp"
+},
+
+
+
+/* ================================
+   UNCOMMON FRUITS
+================================ */
+
+
+flame: {
+    category: "fruit",
+    value: 250000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 250000,
+    robuxPrice: 550,
+    fruitType: "Logia",
+    image: "Flame_Fruit.webp"
+},
+
+
+dark: {
+    category: "fruit",
+    value: 400000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 500000,
+    robuxPrice: 950,
+    fruitType: "Logia",
+    image: "Dark_Fruit.webp"
+},
+
+
+sand: {
+    category: "fruit",
+    value: 420000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 420000,
+    robuxPrice: 850,
+    fruitType: "Logia",
+    image: "Sand_Fruit.webp"
+},
+
+
+ice: {
+    category: "fruit",
+    value: 550000,
+    permanentValue: "N/A",
+    demand: "2/10",
+    demandType: "N/A",
+    price: 350000,
+    robuxPrice: 750,
+    fruitType: "Logia",
+    image: "Ice_Fruit.webp"
+},
+
+
+rubber: {
+    category: "fruit",
+    value: 700000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 750000,
+    robuxPrice: 1200,
+    fruitType: "Natural",
+    image: "Rubber_Fruit.webp"
+},
+
+
+eagle: {
+    category: "fruit",
+    value: 800000,
+    permanentValue: "N/A",
+    demand: "2/10",
+    demandType: "N/A",
+    price: 550000,
+    robuxPrice: 975,
+    fruitType: "Beast",
+    image: "Eagle_Fruit.webp"
+},
+
+
+
+/* ================================
+   RARE FRUITS
+================================ */
+
+
+ghost: {
+    category: "fruit",
+    value: 800000,
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 940000,
+    robuxPrice: 1275,
+    fruitType: "Natural",
+    image: "Ghost_Fruit.webp"
+},
+
+
+light: {
+    category: "fruit",
+    value: 800000,
+    permanentValue: "N/A",
+    demand: "2/10",
+    demandType: "N/A",
+    price: 650000,
+    robuxPrice: 1100,
+    fruitType: "Logia",
+    image: "Light_Fruit.webp"
+},
+
+
+diamond: {
+    category: "fruit",
+    value: 1000000,
+    permanentValue: "N/A",
+    demand: "2/10",
+    demandType: "N/A",
+    price: 600000,
+    robuxPrice: 1000,
+    fruitType: "Natural",
+    image: "Diamond_Fruit.webp"
+},
+
+
+quake: {
+    category: "fruit",
+    value: 1000000,
+    permanentValue: "N/A",
+    demand: "2/10",
+    demandType: "N/A",
+    price: 1000000,
+    robuxPrice: 1500,
+    fruitType: "Natural",
+    image: "Quake_Fruit.webp"
+},
+
+
+magma: {
+    category: "fruit",
+    value: 1150000,
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "N/A",
+    price: 960000,
+    robuxPrice: 1300,
+    fruitType: "Logia",
+    image: "Magma_Fruit.webp"
+},
+
+
+
+/* ================================
+   LEGENDARY FRUITS
+================================ */
+
+
+love: {
+    category: "fruit",
+    value: 1500000,
+    permanentValue: "N/A",
+    demand: "3/10",
+    demandType: "N/A",
+    price: 1300000,
+    robuxPrice: 1700,
+    fruitType: "Natural",
+    image: "Love_Fruit.webp"
+},
+
+
+spider: {
+    category: "fruit",
+    value: 1500000,
+    permanentValue: "N/A",
+    demand: "2/10",
+    demandType: "N/A",
+    price: 1500000,
+    robuxPrice: 1800,
+    fruitType: "Natural",
+    image: "Spider_Fruit.webp"
+},
+
+
+sound: {
+    category: "fruit",
+    value: 2500000,
+    permanentValue: "N/A",
+    demand: "4/10",
+    demandType: "N/A",
+    price: 1700000,
+    robuxPrice: 1900,
+    fruitType: "Natural",
+    image: "Sound_Fruit.webp"
+},
+
+
+phoenix: {
+    category: "fruit",
+    value: 2750000,
+    permanentValue: "N/A",
+    demand: "3/10",
+    demandType: "N/A",
+    price: 1800000,
+    robuxPrice: 2000,
+    fruitType: "Beast",
+    image: "Phoenix_Fruit.webp"
+},
+
+
+creation: {
+    category: "fruit",
+    value: 2500000,
+    permanentValue: "N/A",
+    demand: "2/10",
+    demandType: "N/A",
+    price: 1400000,
+    robuxPrice: 1750,
+    fruitType: "Natural",
+    image: "Creation_Fruit.webp"
+},
+
+
+blizzard: {
+    category: "fruit",
+    value: 5000000,
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "N/A",
+    price: 2400000,
+    robuxPrice: 2250,
+    fruitType: "Logia",
+    image: "Blizzard_Fruit.webp"
+},
+
+
+portal: {
+    category: "fruit",
+    value: 10000000,
+    permanentValue: 4900000000,
+    demand: "9/10",
+    demandType: "Overpaid",
+    price: 1900000,
+    robuxPrice: 2000,
+    fruitType: "Natural",
+    image: "Portal_Fruit.webp"
+},
+
+
+buddha: {
+    category: "fruit",
+    value: 10000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: 1200000,
+    robuxPrice: 1650,
+    fruitType: "Beast",
+    image: "Buddha_Fruit.webp"
+},
+
+
+lightning: {
+    category: "fruit",
+    value: 50000000,
+    permanentValue: 3300000000,
+    demand: "5/10",
+    demandType: "Underpaid",
+    price: 2100000,
+    robuxPrice: 2100,
+    fruitType: "Logia",
+    image: "Lightning_Fruit.webp"
+},
+
+
+pain: {
+    category: "fruit",
+    value: 10000000,
+    permanentValue: 3500000000,
+    demand: "5/10",
+    demandType: "Stable",
+    price: 2300000,
+    robuxPrice: 2200,
+    fruitType: "Natural",
+    image: "Pain_Fruit.webp"
+},
+
+
+
+/* ================================
+   MYTHICAL FRUITS
+================================ */
+
+
+gravity: {
+    category: "fruit",
+    value: 10000000,
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "N/A",
+    price: 2500000,
+    robuxPrice: 2300,
+    fruitType: "Natural",
+    image: "Gravity_Fruit.webp"
+},
+
+
+mammoth: {
+    category: "fruit",
+    value: 10000000,
+    permanentValue: 4000000000,
+    demand: "5/10",
+    demandType: "Stable",
+    price: 2700000,
+    robuxPrice: 2350,
+    fruitType: "Beast",
+    image: "Mammoth_Fruit.webp"
+},
+
+
+"t-rex": {
+    category: "fruit",
+    value: 20000000,
+    permanentValue: "N/A",
+    demand: "8/10",
+    demandType: "N/A",
+    price: 2700000,
+    robuxPrice: 2350,
+    fruitType: "Beast",
+    image: "T-Rex_Fruit.webp"
+},
+
+
+dough: {
+    category: "fruit",
+    value: 30000000,
+    permanentValue: "N/A",
+    demand: "9/10",
+    demandType: "N/A",
+    price: 2800000,
+    robuxPrice: 2400,
+    fruitType: "Logia",
+    image: "Dough_Fruit.webp"
+},
+
+
+shadow: {
+    category: "fruit",
+    value: 6500000,
+    permanentValue: 3900000000,
+    demand: "5/10",
+    demandType: "Stable",
+    price: 2900000,
+    robuxPrice: 2425,
+    fruitType: "Natural",
+    image: "Shadow_Fruit.webp"
+},
+
+
+venom: {
+    category: "fruit",
+    value: 20000000,
+    permanentValue: 4300000000,
+    demand: "8/10",
+    demandType: "Stable",
+    price: 3000000,
+    robuxPrice: 2450,
+    fruitType: "Natural",
+    image: "Venom_Fruit.webp"
+},
+
+
+gas: {
+    category: "fruit",
+    value: 60000000,
+    permanentValue: 4300000000,
+    demand: "8/10",
+    demandType: "Stable",
+    price: 3200000,
+    robuxPrice: 2500,
+    fruitType: "Logia",
+    image: "Gas_Fruit.webp"
+},
+
+
+spirit: {
+    category: "fruit",
+    value: 10000000,
+    permanentValue: 4700000000,
+    demand: "7/10",
+    demandType: "Stable",
+    price: 3400000,
+    robuxPrice: 2550,
+    fruitType: "Natural",
+    image: "Spirit_Fruit.webp"
+},
+
+
+tiger: {
+    category: "fruit",
+    value: 130000000,
+    permanentValue: "N/A",
+    demand: "8/10",
+    demandType: "N/A",
+    price: 5000000,
+    robuxPrice: 3000,
+    fruitType: "Beast",
+    image: "Tiger_Fruit.webp"
+},
+
+
+yeti: {
+    category: "fruit",
+    value: 120000000,
+    permanentValue: "N/A",
+    demand: "7/10",
+    demandType: "N/A",
+    price: 5000000,
+    robuxPrice: 3000,
+    fruitType: "Beast",
+    image: "Yeti_Fruit.webp"
+},
+
+
+kitsune: {
+    category: "fruit",
+    value: 640000000,
+    permanentValue: 6200000000,
+    demand: "10/10",
+    demandType: "Overpaid",
+    price: 8000000,
+    robuxPrice: 4000,
+    fruitType: "Beast",
+    image: "Kitsune_Fruit.webp"
+},
+
+
+control: {
+    category: "fruit",
+    value: 160000000,
+    permanentValue: 6200000000,
+    demand: "10/10",
+    demandType: "Overpaid",
+    price: 9000000,
+    robuxPrice: 4000,
+    fruitType: "Natural",
+    image: "Control_Fruit.webp"
+},
+
+
+"east dragon": {
+    category: "fruit",
+    value: 4900000000,
+    permanentValue: 7100000000,
+    demand: "7/10",
+    demandType: "Overpaid",
+    price: 15000000,
+    robuxPrice: 5000,
+    fruitType: "Beast",
+    image: "East_Dragon.webp"
+},
+
+
+"west dragon": {
+    category: "fruit",
+    value: 5500000000,
+    permanentValue: 7100000000,
+    demand: "10/10",
+    demandType: "Overpaid",
+    price: 15000000,
+    robuxPrice: 5000,
+    fruitType: "Beast",
+    image: "West_Dragon.webp"
+},
+
+
+
+/* ================================
+   LIMITED ITEMS
+================================ */
+
+
+"permanent dragon token": {
+    category: "limited",
+    value: "N/A",
+    permanentValue: "N/A",
+    demand: "6/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"doghouse frame break": {
+    category: "limited",
+    value: 6990000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"rabid dog blade": {
+    category: "limited",
+    value: 6200000000,
+    permanentValue: "N/A",
+    demand: "8/10",
+    demandType: "Stable",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"dog blade": {
+    category: "limited",
+    value: 580000000,
+    permanentValue: "N/A",
+    demand: "8/10",
+    demandType: "Stable",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"fiend yeti": {
+    category: "limited",
+    value: 960000000,
+    permanentValue: "N/A",
+    demand: "9/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"empyrean kitsune": {
+    category: "limited",
+    value: 9900000000,
+    permanentValue: 9900000000,
+    demand: "10/10",
+    demandType: "Overpaid",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"galaxy kitsune": {
+    category: "limited",
+    value: 14300000000,
+    permanentValue: 14300000000,
+    demand: "10/10",
+    demandType: "Overpaid",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"ember west dragon": {
+    category: "limited",
+    value: 7100000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"crimson kitsune": {
+    category: "limited",
+    value: 8700000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: 2000,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+meme: {
+    category: "limited",
+    value: 4610000000,
+    permanentValue: "N/A",
+    demand: "7/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"divine portal": {
+    category: "limited",
+    value: 1670000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"purple lightning": {
+    category: "limited",
+    value: 5340000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+parrot: {
+    category: "limited",
+    value: "N/A",
+    permanentValue: "N/A",
+    demand: "1/10",
+    demandType: "N/A",
+    price: 499,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"red lightning": {
+    category: "limited",
+    value: 3500000000,
+    permanentValue: 3500000000,
+    demand: "10/10",
+    demandType: "Overpaid",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"yellow lightning": {
+    category: "limited",
+    value: 1760000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"green lightning": {
+    category: "limited",
+    value: 410000000,
+    permanentValue: "N/A",
+    demand: "7/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+werewolf: {
+    category: "limited",
+    value: 1060000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"rose quartz diamond": {
+    category: "limited",
+    value: 350000000,
+    permanentValue: "N/A",
+    demand: "7/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"emerald diamond": {
+    category: "limited",
+    value: 220000000,
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"topaz diamond": {
+    category: "limited",
+    value: 220000000,
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"ruby diamond": {
+    category: "limited",
+    value: 160000000,
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"dragon token": {
+    category: "limited",
+    value: "N/A",
+    permanentValue: "N/A",
+    demand: "4/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+eclipse: {
+    category: "limited",
+    value: "N/A",
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"super spirit pain": {
+    category: "limited",
+    value: 3300000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"torment pain": {
+    category: "limited",
+    value: 180000000,
+    permanentValue: "N/A",
+    demand: "3/10",
+    demandType: "Stable",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"sadness pain": {
+    category: "limited",
+    value: 860000000,
+    permanentValue: "N/A",
+    demand: "7/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"frustration pain": {
+    category: "limited",
+    value: 900000000,
+    permanentValue: "N/A",
+    demand: "8/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"celestial pain": {
+    category: "limited",
+    value: 1020000000,
+    permanentValue: "N/A",
+    demand: "8/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"eagle requiem": {
+    category: "limited",
+    value: 160000000,
+    permanentValue: "N/A",
+    demand: "4/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"eagle glacier": {
+    category: "limited",
+    value: 20000000,
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "Stable",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"eagle matrix": {
+    category: "limited",
+    value: 250000000,
+    permanentValue: "N/A",
+    demand: "5/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"celebration bomb": {
+    category: "limited",
+    value: 10000000,
+    permanentValue: "N/A",
+    demand: "2/10",
+    demandType: "Stable",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"azura bomb": {
+    category: "limited",
+    value: 640000000,
+    permanentValue: "N/A",
+    demand: "6/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"thermite bomb": {
+    category: "limited",
+    value: 580000000,
+    permanentValue: "N/A",
+    demand: "6/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"nuclear bomb": {
+    category: "limited",
+    value: 610000000,
+    permanentValue: "N/A",
+    demand: "6/10",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"orange portal": {
+    category: "limited",
+    value: "N/A",
+    permanentValue: "N/A",
+    demand: "SOON",
+    demandType: "N/A",
+    price: "N/A",
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+
+/* ================================
+   GAMEPASSES
+================================ */
+
+
+"fruit notifier": {
+    category: "gamepass",
+    value: 4790000000,
+    permanentValue: "N/A",
+    demand: "9/10",
+    demandType: "N/A",
+    price: 2700,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"dark blade": {
+    category: "gamepass",
+    value: 1100000000,
+    permanentValue: "N/A",
+    demand: "9/10",
+    demandType: "Stable",
+    price: 1200,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"mythical scrolls": {
+    category: "gamepass",
+    value: 2400000000,
+    permanentValue: "N/A",
+    demand: "4/10",
+    demandType: "Stable",
+    price: 1500,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"legendary scrolls": {
+    category: "gamepass",
+    value: 680000000,
+    permanentValue: "N/A",
+    demand: "3/10",
+    demandType: "N/A",
+    price: 800,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"+1 fruit storage": {
+    category: "gamepass",
+    value: 450000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: 400,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"2x mastery": {
+    category: "gamepass",
+    value: 450000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: 450,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"2x money": {
+    category: "gamepass",
+    value: 450000000,
+    permanentValue: "N/A",
+    demand: "10/10",
+    demandType: "N/A",
+    price: 450,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"2x boss drops": {
+    category: "gamepass",
+    value: 300000000,
+    permanentValue: "N/A",
+    demand: "8/10",
+    demandType: "N/A",
+    price: 350,
+    priceType: "Robux",
+    fruitType: "N/A"
+},
+
+
+"fast boats": {
+    category: "gamepass",
+    value: 300000000,
+    permanentValue: "N/A",
+    demand: "9/10",
+    demandType: "N/A",
+    price: 350,
+    priceType: "Robux",
+    fruitType: "N/A"
+}
+
+
+};
+
+
+
+/* ================================
+   SEARCH ALIASES
+================================ */
+
+
+const aliases = {
+
+
+    /* DRAGONS */
+
+    "dragon west":
+        "west dragon",
+
+    "western dragon":
+        "west dragon",
+
+    "west drag":
+        "west dragon",
+
+    "westdragon":
+        "west dragon",
+
+    "dragon east":
+        "east dragon",
+
+    "eastern dragon":
+        "east dragon",
+
+    "east drag":
+        "east dragon",
+
+    "eastdragon":
+        "east dragon",
+
+
+    /* T-REX */
+
+    "trex":
+        "t-rex",
+
+    "t rex":
+        "t-rex",
+
+    "t.rex":
+        "t-rex",
+
+
+    /* BUDDHA */
+
+    "budha":
+        "buddha",
+
+    "buda":
+        "buddha",
+
+
+    /* KITSUNE */
+
+    "kit":
+        "kitsune",
+
+    "kitsu":
+        "kitsune",
+
+
+    /* MEME */
+
+    "meme-meme":
+        "meme",
+
+    "meme meme":
+        "meme",
+
+    "meme fruit":
+        "meme",
+
+    "meme-meme fruit":
+        "meme",
+
+
+    /* LIMITEDS */
+
+    "rabid dog":
+        "rabid dog blade",
+
+    "rabid":
+        "rabid dog blade",
+
+    "rabidblade":
+        "rabid dog blade",
+
+    "dogblade":
+        "dog blade",
+
+    "redlightning":
+        "red lightning",
+
+    "glacier eagle":
+        "eagle glacier",
+
+    "glacier":
+        "eagle glacier",
+
+
+    /* GAMEPASSES */
+
+    "storage":
+        "+1 fruit storage",
+
+    "fruit storage":
+        "+1 fruit storage",
+
+    "1 fruit storage":
+        "+1 fruit storage",
+
+    "+1 storage":
+        "+1 fruit storage",
+
+    "boss drops":
+        "2x boss drops",
+
+    "2x drops":
+        "2x boss drops",
+
+    "money":
+        "2x money",
+
+    "mastery":
+        "2x mastery",
+
+    "boats":
+        "fast boats",
+
+    "mythical scroll":
+        "mythical scrolls",
+
+
+    /* EMPYREAN KITSUNE */
+
+    "emperion kitsune":
+        "empyrean kitsune",
+
+    "emp kitsune":
+        "empyrean kitsune",
+
+    "empyrean":
+        "empyrean kitsune",
+
+
+    /* GALAXY KITSUNE */
+
+    "galaxy":
+        "galaxy kitsune",
+
+    "galaxy kit":
+        "galaxy kitsune"
+
+};
+/* ================================
+   BASIC HELPERS
+================================ */
+
+
+function formatName(name) {
+
+    return name
+        .split(" ")
+        .map(
+            word =>
+                word.charAt(0).toUpperCase()
+                +
+                word.slice(1)
+        )
+        .join(" ");
+}
+
+
+
+function formatValue(value) {
+
+    if (
+        value === "N/A"
+        ||
+        value === undefined
+        ||
+        value === null
+        ||
+        Number.isNaN(value)
+    ) {
+        return "N/A";
+    }
+
+
+    if (value >= 1000000000) {
+
+        return (
+            value / 1000000000
+        )
+        .toFixed(2)
+        .replace(/\.?0+$/, "")
+        + "B";
+    }
+
+
+    if (value >= 1000000) {
+
+        return (
+            value / 1000000
+        )
+        .toFixed(2)
+        .replace(/\.?0+$/, "")
+        + "M";
+    }
+
+
+    if (value >= 1000) {
+
+        return (
+            value / 1000
+        )
+        .toFixed(1)
+        .replace(/\.0$/, "")
+        + "K";
+    }
+
+
+    return value.toLocaleString();
+}
+
+
+
+function formatBeli(value) {
+
+    if (
+        value === "N/A"
+        ||
+        value === undefined
+        ||
+        value === null
+    ) {
+        return "N/A";
+    }
+
+
+    return (
+        "$" +
+        Number(value).toLocaleString()
+    );
+}
+
+
+
+function formatRobux(value) {
+
+    if (
+        value === "N/A"
+        ||
+        value === undefined
+        ||
+        value === null
+    ) {
+        return "N/A";
+    }
+
+
+    return (
+        "R$ " +
+        Number(value).toLocaleString()
+    );
+}
+
+
+
+/* ================================
+   GET CORRECT TRADE VALUE
+
+   Physical Fruit:
+   item.value
+
+   Permanent Fruit:
+   item.permanentValue
+
+   Limited / Gamepass:
+   item.value
+================================ */
+
+
+function getSelectionValue(selection) {
+
+    if (!selection) {
+        return 0;
+    }
+
+
+    const item =
+        items[selection.name];
+
+
+    if (!item) {
+        return 0;
+    }
+
+
+    if (
+        selection.mode === "permanent"
+        &&
+        item.category === "fruit"
+    ) {
+
+        if (
+            typeof item.permanentValue === "number"
+        ) {
+            return item.permanentValue;
+        }
+
+
+        return 0;
+    }
+
+
+    if (
+        typeof item.value === "number"
+    ) {
+        return item.value;
+    }
+
+
+    return 0;
+}
+
+
+
+/* ================================
+   GET TRADE ARRAY
+================================ */
+
+
+function getSideArray(side) {
+
+    if (side === "offer") {
+        return offerItems;
+    }
+
+
+    return requestItems;
+}
+
+
+
+/* ================================
+   RENDER EVERYTHING
+================================ */
+
+
+function renderEverything() {
+
+    renderSlots(
+        "offer",
+        offerItems,
+        "offerSlots"
+    );
+
+
+    renderSlots(
+        "request",
+        requestItems,
+        "requestSlots"
+    );
+
+
+    updateTotals();
+
+    updateTradeAnalysis();
+}
+
+
+
+/* ================================
+   RENDER SLOTS
+================================ */
+
+
+function renderSlots(
+    side,
+    selections,
+    containerId
+) {
+
+    const container =
+        document.getElementById(
+            containerId
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    selections.forEach(
+        (
+            selection,
+            index
+        ) => {
+
+
+            const slot =
+                document.createElement(
+                    "div"
+                );
+
+
+            slot.className =
+                "trade-slot";
+
+
+            /* =========================
+               EMPTY SLOT
+            ========================= */
+
+            if (!selection) {
+
+                slot.innerHTML = `
+
+                    <button
+                        class="empty-slot"
+                        onclick="openItemModal(
+                            '${side}',
+                            ${index}
+                        )"
+                    >
+
+                        <div class="plus-icon">
+                            +
+                        </div>
+
+                        <span>
+                            Add Item
+                        </span>
+
+                    </button>
+
+                `;
+
+
+                container.appendChild(
+                    slot
+                );
+
+
+                return;
+            }
+
+
+
+            /* =========================
+               SELECTED ITEM
+            ========================= */
+
+            const item =
+                items[selection.name];
+
+
+            const selectedValue =
+                getSelectionValue(
+                    selection
+                );
+
+
+            let imageHTML =
+                "";
+
+
+            if (item.image) {
+
+                imageHTML = `
+
+                    <img
+                        src="${item.image}"
+                        alt="${formatName(
+                            selection.name
+                        )}"
+                        onerror="
+                            this.style.display='none'
+                        "
+                    >
+
+                `;
+            }
+
+
+
+            let permBadge =
+                "";
+
+
+            if (
+                selection.mode ===
+                "permanent"
+            ) {
+
+                permBadge = `
+
+                    <div class="perm-badge">
+                        PERMANENT
+                    </div>
+
+                `;
+            }
+
+
+
+            /* =========================
+               TOOLTIP INFORMATION
+            ========================= */
+
+            let modeLabel =
+                "Physical";
+
+
+            if (
+                selection.mode ===
+                "permanent"
+            ) {
+
+                modeLabel =
+                    "Permanent";
+            }
+
+
+
+            let priceText =
+                "N/A";
+
+
+            if (
+                item.category === "fruit"
+            ) {
+
+                if (
+                    selection.mode ===
+                    "permanent"
+                ) {
+
+                    priceText =
+                        formatRobux(
+                            item.robuxPrice
+                        );
+
+                } else {
+
+                    priceText =
+                        formatBeli(
+                            item.price
+                        );
+                }
+
+            } else if (
+                item.priceType ===
+                "Robux"
+            ) {
+
+                priceText =
+                    formatRobux(
+                        item.price
+                    );
+            }
+
+
+
+            let demandDisplay =
+                item.demand;
+
+
+            if (
+                item.demandType
+                &&
+                item.demandType !==
+                "N/A"
+            ) {
+
+                demandDisplay +=
+                    " - " +
+                    item.demandType;
+            }
+
+
+
+            slot.innerHTML = `
+
+                <div class="selected-item">
+
+
+                    <button
+                        class="info-button"
+                        onclick="
+                            event.stopPropagation();
+                            toggleTooltip(
+                                '${side}',
+                                ${index}
+                            );
+                        "
+                        aria-label="Show item information"
+                    >
+                        i
+                    </button>
+
+
+                    <button
+                        class="remove-item"
+                        onclick="
+                            event.stopPropagation();
+                            removeItem(
+                                '${side}',
+                                ${index}
+                            );
+                        "
+                        aria-label="Remove item"
+                    >
+                        ×
+                    </button>
+
+
+                    ${imageHTML}
+
+
+                    <p
+                        class="selected-name"
+                        title="${formatName(
+                            selection.name
+                        )}"
+                    >
+                        ${formatName(
+                            selection.name
+                        )}
+                    </p>
+
+
+                    <div class="selected-value">
+                        ${formatValue(
+                            selectedValue
+                        )}
+                    </div>
+
+
+                    ${permBadge}
+
+
+
+                    <div
+                        class="item-tooltip"
+                        id="tooltip-${side}-${index}"
+                    >
+
+                        <h4 class="tooltip-title">
+
+                            ${formatName(
+                                selection.name
+                            )}
+
+                            ${
+                                selection.mode ===
+                                "permanent"
+                                    ? " (Permanent)"
+                                    : ""
+                            }
+
+                        </h4>
+
+
+                        <div class="tooltip-row">
+
+                            <span>
+                                Trade Value
+                            </span>
+
+                            <strong>
+                                ${formatValue(
+                                    selectedValue
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="tooltip-row">
+
+                            <span>
+                                Demand
+                            </span>
+
+                            <strong>
+                                ${item.demand}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="tooltip-row">
+
+                            <span>
+                                Demand Type
+                            </span>
+
+                            <strong>
+                                ${
+                                    item.demandType
+                                    ||
+                                    "N/A"
+                                }
+                            </strong>
+
+                        </div>
+
+
+                        <div class="tooltip-row">
+
+                            <span>
+                                Item Type
+                            </span>
+
+                            <strong>
+                                ${
+                                    item.category ===
+                                    "fruit"
+                                        ? modeLabel +
+                                          " Fruit"
+                                        :
+                                          formatName(
+                                              item.category
+                                          )
+                                }
+                            </strong>
+
+                        </div>
+
+
+                        <div class="tooltip-row">
+
+                            <span>
+                                ${
+                                    selection.mode ===
+                                    "permanent"
+                                        ? "Permanent Price"
+                                        :
+                                          item.category ===
+                                          "fruit"
+                                            ? "Beli Price"
+                                            : "Price"
+                                }
+                            </span>
+
+                            <strong>
+                                ${priceText}
+                            </strong>
+
+                        </div>
+
+
+                        ${
+                            item.category ===
+                            "fruit"
+
+                                ? `
+
+                                    <div class="tooltip-row">
+
+                                        <span>
+                                            Fruit Type
+                                        </span>
+
+                                        <strong>
+                                            ${item.fruitType}
+                                        </strong>
+
+                                    </div>
+
+                                `
+
+                                : ""
+                        }
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                slot
+            );
+
+        }
+    );
+}
+
+
+
+/* ================================
+   OPEN ITEM PICKER
+================================ */
+
+
+function openItemModal(
+    side,
+    slotIndex
+) {
+
+    activeSide =
+        side;
+
+
+    activeSlotIndex =
+        slotIndex;
+
+
+    selectedItemName =
+        null;
+
+
+    selectedMode =
+        "physical";
+
+
+    activeCategory =
+        "all";
+
+
+    document
+        .getElementById(
+            "itemSearch"
+        )
+        .value = "";
+
+
+    document
+        .querySelectorAll(
+            ".category-button"
+        )
+        .forEach(
+            button => {
+
+                button.classList.remove(
+                    "active"
+                );
+
+
+                if (
+                    button.dataset.category ===
+                    "all"
+                ) {
+
+                    button.classList.add(
+                        "active"
+                    );
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "modePanel"
+        )
+        .classList
+        .remove(
+            "open"
+        );
+
+
+    document
+        .getElementById(
+            "itemModal"
+        )
+        .classList
+        .add(
+            "open"
+        );
+
+
+    renderItemPicker();
+
+
+    setTimeout(
+        () => {
+
+            document
+                .getElementById(
+                    "itemSearch"
+                )
+                .focus();
+
+        },
+        100
+    );
+}
+
+
+
+/* ================================
+   CLOSE ITEM PICKER
+================================ */
+
+
+function closeItemModal() {
+
+    document
+        .getElementById(
+            "itemModal"
+        )
+        .classList
+        .remove(
+            "open"
+        );
+
+
+    selectedItemName =
+        null;
+
+
+    selectedMode =
+        "physical";
+}
+
+
+
+/* ================================
+   CATEGORY FILTER
+================================ */
+
+
+function setCategory(
+    category,
+    button
+) {
+
+    activeCategory =
+        category;
+
+
+    document
+        .querySelectorAll(
+            ".category-button"
+        )
+        .forEach(
+            categoryButton => {
+
+                categoryButton
+                    .classList
+                    .remove(
+                        "active"
+                    );
+
+            }
+        );
+
+
+    button
+        .classList
+        .add(
+            "active"
+        );
+
+
+    renderItemPicker();
+}
+
+
+
+/* ================================
+   RENDER ITEM PICKER
+================================ */
+
+
+function renderItemPicker() {
+
+    const itemList =
+        document.getElementById(
+            "itemList"
+        );
+
+
+    let search =
+        document
+            .getElementById(
+                "itemSearch"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+
+    /* USE ALIASES FOR EXACT SEARCH */
+
+    if (aliases[search]) {
+
+        search =
+            aliases[search];
+    }
+
+
+
+    const itemNames =
+        Object.keys(items);
+
+
+    const filtered =
+        itemNames.filter(
+            name => {
+
+
+                const item =
+                    items[name];
+
+
+                const categoryMatches =
+                    activeCategory === "all"
+                    ||
+                    item.category ===
+                    activeCategory;
+
+
+                const searchMatches =
+                    search === ""
+                    ||
+                    name.includes(
+                        search
+                    );
+
+
+                return (
+                    categoryMatches
+                    &&
+                    searchMatches
+                );
+
+            }
+        );
+
+
+
+    /* Higher trade values first */
+
+    filtered.sort(
+        (
+            a,
+            b
+        ) => {
+
+            const valueA =
+                typeof items[a].value ===
+                "number"
+                    ? items[a].value
+                    : 0;
+
+
+            const valueB =
+                typeof items[b].value ===
+                "number"
+                    ? items[b].value
+                    : 0;
+
+
+            return (
+                valueB -
+                valueA
+            );
+        }
+    );
+
+
+
+    if (
+        filtered.length ===
+        0
+    ) {
+
+        itemList.innerHTML = `
+
+            <div
+                style="
+                    grid-column: 1 / -1;
+                    text-align: center;
+                    padding: 30px;
+                    color: #d8c3a5;
+                "
+            >
+                No items found.
+            </div>
+
+        `;
+
+
+        return;
+    }
+
+
+
+    itemList.innerHTML =
+        filtered
+            .map(
+                name => {
+
+
+                    const item =
+                        items[name];
+
+
+                    let imageHTML =
+                        "";
+
+
+                    if (
+                        item.image
+                    ) {
+
+                        imageHTML = `
+
+                            <img
+                                src="${item.image}"
+                                alt="${formatName(
+                                    name
+                                )}"
+                                onerror="
+                                    this.style.display='none'
+                                "
+                            >
+
+                        `;
+                    }
+
+
+
+                    return `
+
+                        <button
+                            class="picker-item"
+                            onclick="
+                                choosePickerItem(
+                                    ${JSON.stringify(
+                                        name
+                                    )}
+                                )
+                            "
+                        >
+
+                            ${imageHTML}
+
+
+                            <div class="picker-name">
+
+                                ${formatName(
+                                    name
+                                )}
+
+                            </div>
+
+
+                            <div class="picker-value">
+
+                                ${formatValue(
+                                    item.value
+                                )}
+
+                            </div>
+
+
+                            <div class="picker-category">
+
+                                ${formatName(
+                                    item.category
+                                )}
+
+                            </div>
+
+
+                        </button>
+
+                    `;
+
+                }
+            )
+            .join("");
+}
+
+
+
+/* ================================
+   ITEM PICKED
+================================ */
+
+
+function choosePickerItem(
+    itemName
+) {
+
+    selectedItemName =
+        itemName;
+
+
+    const item =
+        items[itemName];
+
+
+    selectedMode =
+        "physical";
+
+
+    document
+        .getElementById(
+            "modeSelectedName"
+        )
+        .textContent =
+            formatName(
+                itemName
+            );
+
+
+    document
+        .getElementById(
+            "physicalModeValue"
+        )
+        .textContent =
+            "Value: " +
+            formatValue(
+                item.value
+            );
+
+
+    document
+        .getElementById(
+            "permanentModeValue"
+        )
+        .textContent =
+            "Value: " +
+            formatValue(
+                item.permanentValue
+            );
+
+
+
+    const physicalButton =
+        document.getElementById(
+            "physicalMode"
+        );
+
+
+    const permanentButton =
+        document.getElementById(
+            "permanentMode"
+        );
+
+
+    physicalButton
+        .classList
+        .add(
+            "active"
+        );
+
+
+    permanentButton
+        .classList
+        .remove(
+            "active"
+        );
+
+
+    permanentButton
+        .classList
+        .remove(
+            "disabled"
+        );
+
+
+
+    /* ================================
+       NORMAL FRUIT
+    ================================ */
+
+    if (
+        item.category ===
+        "fruit"
+    ) {
+
+
+        if (
+            typeof item.permanentValue !==
+            "number"
+        ) {
+
+            permanentButton
+                .classList
+                .add(
+                    "disabled"
+                );
+        }
+
+
+        document
+            .getElementById(
+                "modePanel"
+            )
+            .classList
+            .add(
+                "open"
+            );
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       LIMITED / GAMEPASS
+
+       No Physical/Permanent choice.
+       Add immediately.
+    ================================ */
+
+    const targetArray =
+        getSideArray(
+            activeSide
+        );
+
+
+    targetArray[
+        activeSlotIndex
+    ] = {
+
+        name:
+            itemName,
+
+        mode:
+            "physical"
+
+    };
+
+
+    closeItemModal();
+
+    renderEverything();
+}
+
+
+
+/* ================================
+   PHYSICAL / PERMANENT MODE
+================================ */
+
+
+function selectMode(
+    mode
+) {
+
+    if (
+        !selectedItemName
+    ) {
+        return;
+    }
+
+
+    const item =
+        items[
+            selectedItemName
+        ];
+
+
+    if (
+        mode === "permanent"
+        &&
+        (
+            item.category !==
+            "fruit"
+            ||
+            typeof item.permanentValue !==
+            "number"
+        )
+    ) {
+
+        return;
+    }
+
+
+    selectedMode =
+        mode;
+
+
+    document
+        .getElementById(
+            "physicalMode"
+        )
+        .classList
+        .toggle(
+            "active",
+            mode ===
+            "physical"
+        );
+
+
+    document
+        .getElementById(
+            "permanentMode"
+        )
+        .classList
+        .toggle(
+            "active",
+            mode ===
+            "permanent"
+        );
+}
+
+
+
+/* ================================
+   CONFIRM ADD FRUIT
+================================ */
+
+
+function confirmAddItem() {
+
+    if (
+        !selectedItemName
+        ||
+        activeSide === null
+        ||
+        activeSlotIndex === null
+    ) {
+
+        return;
+    }
+
+
+    const item =
+        items[
+            selectedItemName
+        ];
+
+
+
+    /* Prevent invalid permanent */
+
+    if (
+        selectedMode ===
+        "permanent"
+        &&
+        (
+            item.category !==
+            "fruit"
+            ||
+            typeof item.permanentValue !==
+            "number"
+        )
+    ) {
+
+        selectedMode =
+            "physical";
+    }
+
+
+
+    const targetArray =
+        getSideArray(
+            activeSide
+        );
+
+
+    targetArray[
+        activeSlotIndex
+    ] = {
+
+        name:
+            selectedItemName,
+
+        mode:
+            selectedMode
+
+    };
+
+
+    closeItemModal();
+
+    renderEverything();
+}
+
+
+
+/* ================================
+   REMOVE ITEM
+================================ */
+
+
+function removeItem(
+    side,
+    index
+) {
+
+    const selections =
+        getSideArray(
+            side
+        );
+
+
+    selections[index] =
+        null;
+
+
+    renderEverything();
+}
+
+
+
+/* ================================
+   MOBILE INFO TOOLTIP
+================================ */
+
+
+function toggleTooltip(
+    side,
+    index
+) {
+
+    const tooltip =
+        document.getElementById(
+            `tooltip-${side}-${index}`
+        );
+
+
+    if (!tooltip) {
+        return;
+    }
+
+
+    const willOpen =
+        !tooltip.classList
+            .contains(
+                "visible"
+            );
+
+
+    document
+        .querySelectorAll(
+            ".item-tooltip.visible"
+        )
+        .forEach(
+            openTooltip => {
+
+                openTooltip
+                    .classList
+                    .remove(
+                        "visible"
+                    );
+
+            }
+        );
+
+
+    if (willOpen) {
+
+        tooltip
+            .classList
+            .add(
+                "visible"
+            );
+    }
+}
+
+
+
+/* ================================
+   LIVE TOTALS
+================================ */
+
+
+function calculateSideTotal(
+    selections
+) {
+
+    return selections.reduce(
+        (
+            total,
+            selection
+        ) => {
+
+            return (
+                total
+                +
+                getSelectionValue(
+                    selection
+                )
+            );
+
+        },
+        0
+    );
+}
+
+
+
+function updateTotals() {
+
+    const offerValue =
+        calculateSideTotal(
+            offerItems
+        );
+
+
+    const requestValue =
+        calculateSideTotal(
+            requestItems
+        );
+
+
+    document
+        .getElementById(
+            "offerTotal"
+        )
+        .textContent =
+            "Total: " +
+            formatValue(
+                offerValue
+            );
+
+
+    document
+        .getElementById(
+            "requestTotal"
+        )
+        .textContent =
+            "Total: " +
+            formatValue(
+                requestValue
+            );
+
+
+    document
+        .getElementById(
+            "analysisOfferValue"
+        )
+        .textContent =
+            formatValue(
+                offerValue
+            );
+
+
+    document
+        .getElementById(
+            "analysisRequestValue"
+        )
+        .textContent =
+            formatValue(
+                requestValue
+            );
+}
+
+
+
+/* ================================
+   SEARCH AS USER TYPES
+================================ */
+
+
+document
+    .getElementById(
+        "itemSearch"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            renderItemPicker();
+
+        }
+    );
+
+
+
+/* ================================
+   CLOSE MODAL BY CLICKING OUTSIDE
+================================ */
+
+
+document
+    .getElementById(
+        "itemModal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+
+                closeItemModal();
+            }
+
+        }
+    );
+
+
+
+/* ================================
+   ESCAPE KEY
+================================ */
+
+
+document
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeItemModal();
+
+
+                document
+                    .querySelectorAll(
+                        ".item-tooltip.visible"
+                    )
+                    .forEach(
+                        tooltip => {
+
+                            tooltip
+                                .classList
+                                .remove(
+                                    "visible"
+                                );
+
+                        }
+                    );
+            }
+
+        }
+    );
+
+
+
+/* ================================
+   INITIAL PAGE RENDER
+================================ */
+
+
+renderEverything();
+
+/* ================================
+   MARKET FAIRNESS SETTINGS
+================================ */
+
+
+/*
+    Change this number later if you want.
+
+    10 means:
+    within 10% market-value difference
+    = FAIR TRADE
+*/
+
+const FAIR_MARKET_RANGE =
+    10;
+
+
+
+/* ================================
+   UPDATE COMPLETE TRADE ANALYSIS
+================================ */
+
+
+function updateTradeAnalysis() {
+
+    updateMarketAnalysis();
+
+    updateInGameTradeCheck();
+}
+
+
+
+/* ================================
+   MARKET VALUE ANALYSIS
+
+   IMPORTANT:
+
+   This uses COMMUNITY TRADE VALUE.
+
+   Physical fruit:
+   item.value
+
+   Permanent fruit:
+   item.permanentValue
+
+   Limited:
+   item.value
+
+   Gamepass:
+   item.value
+================================ */
+
+
+function updateMarketAnalysis() {
+
+    const offerValue =
+        calculateSideTotal(
+            offerItems
+        );
+
+
+    const requestValue =
+        calculateSideTotal(
+            requestItems
+        );
+
+
+    const resultElement =
+        document.getElementById(
+            "marketResult"
+        );
+
+
+    const detailElement =
+        document.getElementById(
+            "marketResultDetail"
+        );
+
+
+
+    /* ================================
+       EMPTY SIDE CHECK
+    ================================ */
+
+    if (
+        offerValue === 0
+        ||
+        requestValue === 0
+    ) {
+
+        resultElement.textContent =
+            "Add Items";
+
+
+        detailElement.textContent =
+            "Add at least one valued item to both sides.";
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       VALUE DIFFERENCE
+    ================================ */
+
+    const rawDifference =
+        Math.abs(
+            offerValue -
+            requestValue
+        );
+
+
+    const highestValue =
+        Math.max(
+            offerValue,
+            requestValue
+        );
+
+
+    const differencePercent =
+        highestValue === 0
+            ? 0
+            :
+            (
+                rawDifference /
+                highestValue
+            ) * 100;
+
+
+
+    /* ================================
+       FAIR
+    ================================ */
+
+    if (
+        differencePercent <=
+        FAIR_MARKET_RANGE
+    ) {
+
+        resultElement.textContent =
+            "FAIR";
+
+
+        detailElement.textContent =
+            "Value difference: "
+            +
+            formatValue(
+                rawDifference
+            )
+            +
+            " ("
+            +
+            differencePercent.toFixed(1)
+            +
+            "%).";
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       WIN
+
+       They are giving MORE value
+       than you are giving.
+    ================================ */
+
+    if (
+        requestValue >
+        offerValue
+    ) {
+
+        resultElement.textContent =
+            "WIN";
+
+
+        detailElement.textContent =
+            "You receive "
+            +
+            formatValue(
+                rawDifference
+            )
+            +
+            " more value ("
+            +
+            differencePercent.toFixed(1)
+            +
+            "% difference).";
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       LOSS
+
+       You are giving MORE value
+       than they are giving.
+    ================================ */
+
+    resultElement.textContent =
+        "LOSS";
+
+
+    detailElement.textContent =
+        "You give "
+        +
+        formatValue(
+            rawDifference
+        )
+        +
+        " more value ("
+        +
+        differencePercent.toFixed(1)
+        +
+        "% difference).";
+}
+
+
+
+/* ================================
+   GET ALL SELECTED ITEMS
+================================ */
+
+
+function getAllSelections() {
+
+    return [
+
+        ...offerItems.filter(
+            selection =>
+                selection !== null
+        ),
+
+        ...requestItems.filter(
+            selection =>
+                selection !== null
+        )
+
+    ];
+}
+
+
+
+/* ================================
+   CHECK FOR PERMANENT FRUIT
+================================ */
+
+
+function containsPermanentFruit() {
+
+    return getAllSelections()
+        .some(
+            selection => {
+
+                return (
+                    selection.mode ===
+                    "permanent"
+                );
+
+            }
+        );
+}
+
+
+
+/* ================================
+   CHECK FOR GAMEPASS
+================================ */
+
+
+function containsGamepass() {
+
+    return getAllSelections()
+        .some(
+            selection => {
+
+                const item =
+                    items[
+                        selection.name
+                    ];
+
+
+                return (
+                    item
+                    &&
+                    item.category ===
+                    "gamepass"
+                );
+
+            }
+        );
+}
+
+
+
+/* ================================
+   CHECK FOR LIMITED
+================================ */
+
+
+function containsLimited() {
+
+    return getAllSelections()
+        .some(
+            selection => {
+
+                const item =
+                    items[
+                        selection.name
+                    ];
+
+
+                return (
+                    item
+                    &&
+                    item.category ===
+                    "limited"
+                );
+
+            }
+        );
+}
+
+
+
+/* ================================
+   CHECK IF A SIDE HAS LIMITED
+================================ */
+
+
+function sideContainsLimited(
+    selections
+) {
+
+    return selections.some(
+        selection => {
+
+            if (!selection) {
+                return false;
+            }
+
+
+            const item =
+                items[
+                    selection.name
+                ];
+
+
+            return (
+                item
+                &&
+                item.category ===
+                "limited"
+            );
+
+        }
+    );
+}
+
+
+
+/* ================================
+   CHECK IF A SIDE HAS
+   PHYSICAL NORMAL FRUIT
+================================ */
+
+
+function sideContainsPhysicalFruit(
+    selections
+) {
+
+    return selections.some(
+        selection => {
+
+            if (!selection) {
+                return false;
+            }
+
+
+            const item =
+                items[
+                    selection.name
+                ];
+
+
+            return (
+
+                item
+                &&
+
+                item.category ===
+                "fruit"
+                &&
+
+                selection.mode ===
+                "physical"
+
+            );
+
+        }
+    );
+}
+
+
+
+/* ================================
+   CALCULATE IN-GAME BELI TOTAL
+
+   ONLY PHYSICAL NORMAL FRUITS
+   CONTRIBUTE TO THIS TOTAL.
+
+   Limited item values are NOT
+   community trade values here.
+
+   Permanent fruits and gamepasses
+   trigger the rule bypass instead.
+================================ */
+
+
+function calculateInGamePrice(
+    selections
+) {
+
+    return selections.reduce(
+        (
+            total,
+            selection
+        ) => {
+
+
+            if (!selection) {
+                return total;
+            }
+
+
+            const item =
+                items[
+                    selection.name
+                ];
+
+
+            if (!item) {
+                return total;
+            }
+
+
+
+            /* Physical normal fruit */
+
+            if (
+                item.category ===
+                "fruit"
+                &&
+                selection.mode ===
+                "physical"
+                &&
+                typeof item.price ===
+                "number"
+            ) {
+
+                return (
+                    total +
+                    item.price
+                );
+            }
+
+
+
+            return total;
+
+        },
+        0
+    );
+}
+
+
+
+/* ================================
+   CALCULATE PRICE DIFFERENCE %
+
+   Uses the larger side as the base.
+
+   Example:
+
+   $10M vs $8M
+
+   difference = $2M
+
+   2 / 10 = 20%
+================================ */
+
+
+function calculatePriceDifferencePercent(
+    offerPrice,
+    requestPrice
+) {
+
+    const highestPrice =
+        Math.max(
+            offerPrice,
+            requestPrice
+        );
+
+
+    if (
+        highestPrice === 0
+    ) {
+
+        return 0;
+    }
+
+
+    return (
+
+        Math.abs(
+            offerPrice -
+            requestPrice
+        )
+
+        /
+
+        highestPrice
+
+    ) * 100;
+}
+
+
+
+/* ================================
+   IN-GAME TRADE CHECK
+================================ */
+
+
+function updateInGameTradeCheck() {
+
+    const statusElement =
+        document.getElementById(
+            "gameTradeStatus"
+        );
+
+
+    const differenceElement =
+        document.getElementById(
+            "gamePriceDifference"
+        );
+
+
+    const allowedElement =
+        document.getElementById(
+            "gameAllowedDifference"
+        );
+
+
+    const reasonElement =
+        document.getElementById(
+            "gameRuleReason"
+        );
+
+
+
+    const allSelections =
+        getAllSelections();
+
+
+
+    /* ================================
+       NOTHING ADDED
+    ================================ */
+
+    if (
+        allSelections.length === 0
+    ) {
+
+        statusElement.textContent =
+            "Waiting";
+
+
+        differenceElement.textContent =
+            "N/A";
+
+
+        allowedElement.textContent =
+            "N/A";
+
+
+        reasonElement.textContent =
+            "Add items";
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       ONE SIDE EMPTY
+    ================================ */
+
+    const offerHasItem =
+        offerItems.some(
+            item => item !== null
+        );
+
+
+    const requestHasItem =
+        requestItems.some(
+            item => item !== null
+        );
+
+
+    if (
+        !offerHasItem
+        ||
+        !requestHasItem
+    ) {
+
+        statusElement.textContent =
+            "Incomplete";
+
+
+        differenceElement.textContent =
+            "N/A";
+
+
+        allowedElement.textContent =
+            "N/A";
+
+
+        reasonElement.textContent =
+            "Both sides need items";
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       PERMANENT OR GAMEPASS
+
+       User rule:
+
+       Permanent fruit:
+       game ignores price difference.
+
+       Gamepass:
+       completely removes price
+       difference requirement.
+    ================================ */
+
+    const hasPermanent =
+        containsPermanentFruit();
+
+
+    const hasGamepass =
+        containsGamepass();
+
+
+    if (
+        hasPermanent
+        ||
+        hasGamepass
+    ) {
+
+        statusElement.textContent =
+            "TRADEABLE";
+
+
+        differenceElement.textContent =
+            "Ignored";
+
+
+        allowedElement.textContent =
+            "No Limit";
+
+
+        if (
+            hasPermanent
+            &&
+            hasGamepass
+        ) {
+
+            reasonElement.textContent =
+                "Permanent + Gamepass bypass";
+
+        } else if (
+            hasPermanent
+        ) {
+
+            reasonElement.textContent =
+                "Permanent fruit bypass";
+
+        } else {
+
+            reasonElement.textContent =
+                "Gamepass bypass";
+        }
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       LIMITED CHECK
+
+       Limited items still require
+       physical fruit price to support
+       the trade.
+
+       If a side contains a limited,
+       that side should also contain
+       a physical normal fruit.
+    ================================ */
+
+    const hasLimited =
+        containsLimited();
+
+
+    if (hasLimited) {
+
+
+        const offerHasLimited =
+            sideContainsLimited(
+                offerItems
+            );
+
+
+        const requestHasLimited =
+            sideContainsLimited(
+                requestItems
+            );
+
+
+        const offerHasFruit =
+            sideContainsPhysicalFruit(
+                offerItems
+            );
+
+
+        const requestHasFruit =
+            sideContainsPhysicalFruit(
+                requestItems
+            );
+
+
+
+        /* Limited on YOUR side
+           without fruit */
+
+        if (
+            offerHasLimited
+            &&
+            !offerHasFruit
+        ) {
+
+            statusElement.textContent =
+                "NOT TRADEABLE";
+
+
+            differenceElement.textContent =
+                "N/A";
+
+
+            allowedElement.textContent =
+                "90%";
+
+
+            reasonElement.textContent =
+                "Add a physical fruit with your limited";
+
+
+            return;
+        }
+
+
+
+        /* Limited on THEIR side
+           without fruit */
+
+        if (
+            requestHasLimited
+            &&
+            !requestHasFruit
+        ) {
+
+            statusElement.textContent =
+                "NOT TRADEABLE";
+
+
+            differenceElement.textContent =
+                "N/A";
+
+
+            allowedElement.textContent =
+                "90%";
+
+
+            reasonElement.textContent =
+                "Their limited needs a physical fruit";
+
+
+            return;
+        }
+    }
+
+
+
+    /* ================================
+       GET PHYSICAL FRUIT PRICE TOTALS
+    ================================ */
+
+    const offerPrice =
+        calculateInGamePrice(
+            offerItems
+        );
+
+
+    const requestPrice =
+        calculateInGamePrice(
+            requestItems
+        );
+
+
+
+    /* ================================
+       NO USABLE BELI PRICES
+    ================================ */
+
+    if (
+        offerPrice === 0
+        ||
+        requestPrice === 0
+    ) {
+
+        statusElement.textContent =
+            "NOT TRADEABLE";
+
+
+        differenceElement.textContent =
+            "N/A";
+
+
+        allowedElement.textContent =
+            hasLimited
+                ? "90%"
+                : "40%";
+
+
+        reasonElement.textContent =
+            "Add physical fruits to both sides";
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       CALCULATE PRICE GAP
+    ================================ */
+
+    const priceDifference =
+        calculatePriceDifferencePercent(
+            offerPrice,
+            requestPrice
+        );
+
+
+
+    /* ================================
+       ALLOWED GAP
+
+       Normal fruits = 40%
+
+       Limited present = 90%
+    ================================ */
+
+    const allowedDifference =
+        hasLimited
+            ? 90
+            : 40;
+
+
+
+    differenceElement.textContent =
+        priceDifference
+            .toFixed(1)
+        +
+        "%";
+
+
+    allowedElement.textContent =
+        allowedDifference
+        +
+        "%";
+
+
+
+    /* ================================
+       PASS
+    ================================ */
+
+    if (
+        priceDifference <=
+        allowedDifference
+    ) {
+
+        statusElement.textContent =
+            "TRADEABLE";
+
+
+        if (hasLimited) {
+
+            reasonElement.textContent =
+                "Limited trade meets 90% requirement";
+
+        } else {
+
+            reasonElement.textContent =
+                "Fruit trade meets 40% requirement";
+        }
+
+
+        return;
+    }
+
+
+
+    /* ================================
+       FAIL
+    ================================ */
+
+    statusElement.textContent =
+        "NOT TRADEABLE";
+
+
+    if (hasLimited) {
+
+        reasonElement.textContent =
+            "Adjust fruits to meet the 90% requirement";
+
+    } else {
+
+        reasonElement.textContent =
+            "Adjust fruits to meet the 40% requirement";
+    }
+}
+
+
+
+/* ================================
+   INITIAL ANALYSIS
+================================ */
+
+
+updateTradeAnalysis();
+
+
+</script>
+
+
+</body>
+
+</html>

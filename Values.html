@@ -216,6 +216,96 @@
 
 
         /* =========================
+           TRADE CALCULATOR BUTTON
+        ========================= */
+
+        .values-actions {
+            width: 100%;
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 25px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .trade-calculator-button {
+            padding:
+                14px 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b5a2b,
+                    #b47a36
+                );
+
+            color: white;
+
+            border:
+                2px solid
+                #d6ad60;
+
+            border-radius:
+                12px;
+
+            font-size:
+                17px;
+
+            font-weight:
+                bold;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 8px 20px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.3
+                );
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s,
+                background 0.2s;
+        }
+
+
+        .trade-calculator-button:hover {
+            transform:
+                translateY(-3px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #a66b32,
+                    #c58a43
+                );
+
+            box-shadow:
+                0 12px 26px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.4
+                );
+        }
+
+
+        .trade-calculator-button:active {
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================
            SEARCH PANEL
         ========================= */
 
@@ -224,7 +314,7 @@
 
             max-width: 760px;
 
-            margin-top: 40px;
+            margin-top: 30px;
 
             padding: 30px;
 
@@ -263,7 +353,8 @@
             margin:
                 0 0 8px;
 
-            font-size: 29px;
+            font-size:
+                29px;
         }
 
 
@@ -274,7 +365,8 @@
             color:
                 #ead8bc;
 
-            font-size: 15px;
+            font-size:
+                15px;
         }
 
 
@@ -459,9 +551,11 @@
             position: absolute;
 
             width: 220px;
+
             height: 220px;
 
             top: -155px;
+
             right: -40px;
 
             transform:
@@ -571,7 +665,8 @@
                     0.09
                 );
 
-            font-size: 17px;
+            font-size:
+                17px;
         }
 
 
@@ -728,9 +823,36 @@
             }
 
 
+            .values-actions {
+                margin-top:
+                    20px;
+
+                width:
+                    100%;
+            }
+
+
+            .trade-calculator-button {
+                width:
+                    100%;
+
+                max-width:
+                    320px;
+
+                padding:
+                    14px 20px;
+
+                font-size:
+                    16px;
+            }
+
+
             .search-panel {
                 padding:
                     24px 18px;
+
+                margin-top:
+                    25px;
             }
 
 
@@ -798,6 +920,10 @@
 <div class="page">
 
 
+    <!-- =====================
+         VALUES HEADER
+    ====================== -->
+
     <div class="values-header">
 
         <h1>
@@ -811,6 +937,28 @@
 
     </div>
 
+
+
+    <!-- =====================
+         TRADE CALCULATOR
+    ====================== -->
+
+    <div class="values-actions">
+
+        <button
+            class="trade-calculator-button"
+            onclick="window.location.href='Calculator.html'"
+        >
+            ⚖ Calculate Trade
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================
+         SEARCH PANEL
+    ====================== -->
 
     <div class="search-panel">
 
@@ -847,6 +995,11 @@
     </div>
 
 
+
+    <!-- =====================
+         BACK BUTTON
+    ====================== -->
+
     <button
         class="back-button"
         onclick="window.location.href='BloxFruits.html'"
@@ -860,8 +1013,7 @@
 
 <script>
 
-
-const items = {
+    const items = {
 
 
 /* ================================
@@ -1250,6 +1402,8 @@ pain: {
     image: "Pain_Fruit.webp"
 },
 
+
+
 /* ================================
    MYTHICAL FRUITS
 ================================ */
@@ -1440,9 +1594,7 @@ control: {
 
 /* ================================
    LIMITED ITEMS
-   NO PERMANENT ROBUX FRUIT PRICE
 ================================ */
-
 
 "permanent dragon token": {
     category: "limited",
@@ -1504,6 +1656,10 @@ control: {
 },
 
 
+/* ================================
+   EMPYREAN KITSUNE
+================================ */
+
 "empyrean kitsune": {
     category: "limited",
     value: 9900000000,
@@ -1515,6 +1671,10 @@ control: {
     fruitType: "N/A"
 },
 
+
+/* ================================
+   GALAXY KITSUNE
+================================ */
 
 "galaxy kitsune": {
     category: "limited",
@@ -1879,7 +2039,6 @@ eclipse: {
 
 /* ================================
    GAMEPASSES
-   NO FRUIT PERMANENT PRICE
 ================================ */
 
 
@@ -1996,7 +2155,7 @@ eclipse: {
 
 
 /* ================================
-   ALIASES
+   SEARCH ALIASES
 ================================ */
 
 
@@ -2075,7 +2234,7 @@ const aliases = {
         "meme",
 
 
-    /* LIMITED */
+    /* LIMITEDS */
 
     "rabid dog":
         "rabid dog blade",
@@ -2153,7 +2312,6 @@ const aliases = {
         "galaxy kitsune"
 
 };
-
 /* ================================
    CHECK VALUE
 ================================ */
